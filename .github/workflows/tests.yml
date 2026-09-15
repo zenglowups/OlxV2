@@ -1,0 +1,37 @@
+name: Foundation checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  foundation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Generate ephemeral local configuration
+        run: docker run --rm -v "$PWD:/work" -w /work php:8.4-cli-bookworm php scripts/setup-env.php
+      - name: Start complete environment
+        run: docker compose up -d --build --wait --wait-timeout 300
+      - name: Validate backend
+        run: |
+          docker compose exec -T app composer validate --strict
+          docker compose exec -T app php artisan migrate --force
+          docker compose exec -T app php artisan test
+          docker compose exec -T app vendor/bin/pint --test
+          docker compose exec -T app php artisan app:smoke
+      - name: Validate frontend
+        run: docker compose run --rm --no-deps assets sh -c 'npm run lint && npm run build'
+      - name: Browser checks
+        run: |
+          docker compose run --rm --no-deps -e PLAYWRIGHT_BASE_URL=http://web browser
+      - name: Service diagnostics
+        if: failure()
+        run: docker compose logs --tail 100
+      - name: Stop services without deleting volumes
+        if: always()
+        run: docker compose --profile test stop

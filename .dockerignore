@@ -1,0 +1,11 @@
+.git
+.env
+.env.*
+!.env.example
+vendor
+node_modules
+.laravel-scaffold
+.tools
+storage/logs/*
+test-results
+docs/design-references

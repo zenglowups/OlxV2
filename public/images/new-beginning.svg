@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="540" viewBox="0 0 560 540">
+<defs>
+  <linearGradient id="wall" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ede9df"/><stop offset="1" stop-color="#f8f5ef"/></linearGradient>
+  <linearGradient id="chair" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#398c7d"/><stop offset="1" stop-color="#176256"/></linearGradient>
+  <linearGradient id="seat" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#5eaa95"/><stop offset="1" stop-color="#317c6c"/></linearGradient>
+  <linearGradient id="pot" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#c78e63"/><stop offset="1" stop-color="#e3b78c"/></linearGradient>
+  <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="12"/></filter>
+  <pattern id="rug" width="12" height="12" patternUnits="userSpaceOnUse"><path d="M0 1h12M1 0v12" fill="none" stroke="#c7b89b" stroke-opacity=".16"/></pattern>
+</defs>
+<path d="M0 0h560v540H0Z" fill="url(#wall)"/>
+<path d="M320 0 130 428h74L438 0ZM444 0 251 428h119L560 100V0Z" fill="#fff" opacity=".34"/>
+<path d="M0 415h560v125H0Z" fill="#e7e1d5"/>
+<path d="M0 415h560" stroke="#dad3c6" stroke-width="2"/>
+<rect x="43" y="87" width="108" height="142" rx="2" fill="#d4c9b5"/>
+<rect x="49" y="93" width="96" height="130" fill="#faf7ef"/>
+<path d="M62 197c23-63 27-63 62 0" fill="#cf9e74"/>
+<circle cx="106" cy="131" r="17" fill="#d7bb76"/>
+<path d="M61 198h65" stroke="#a69b87" stroke-width="2"/>
+<ellipse cx="284" cy="475" rx="201" ry="31" fill="#c9bda6" opacity=".55" filter="url(#shadow)"/>
+<ellipse cx="273" cy="481" rx="222" ry="36" fill="#f0e8d7"/>
+<ellipse cx="273" cy="481" rx="222" ry="36" fill="url(#rug)"/>
+<path d="M417 157v280" stroke="#8d7449" stroke-width="6"/>
+<path d="M390 442h56" stroke="#8d7449" stroke-width="8" stroke-linecap="round"/>
+<path d="M382 105h70l26 79H358Z" fill="#dcc494"/>
+<path d="M382 105h70" stroke="#c5ad7d" stroke-width="4"/>
+<ellipse cx="418" cy="184" rx="60" ry="8" fill="#c6af7f"/>
+<ellipse cx="418" cy="184" rx="51" ry="4" fill="#f9edc9"/>
+<path d="m163 422-11 45m179-45 12 45" stroke="#795e44" stroke-width="11" stroke-linecap="round"/>
+<path d="M150 417V257q0-45 46-48l89-4q46 0 52 44l9 168Z" fill="url(#chair)"/>
+<path d="M168 329v-68q0-30 30-32l82-4q29 0 33 33l5 71" fill="#519584"/>
+<path d="M250 231v94" stroke="#317665" stroke-opacity=".4"/>
+<path d="M145 333h189v89q-96 35-189 0Z" fill="#266e60"/>
+<path d="M144 327q95-25 188 0l4 40q-95 25-196 0Z" fill="url(#seat)"/>
+<path d="M130 314q-23 0-21 27l7 79q1 17 22 17h17V339q0-25-25-25ZM345 308q24 0 22 28l-7 85q-1 15-21 16h-17v-99q0-29 23-30Z" fill="url(#chair)"/>
+<path d="M122 339v71m224-76-6 76" stroke="#66a48f" stroke-opacity=".45" stroke-width="2"/>
+<path d="m197 260 49-8 20 65-58 11Z" fill="#f2dfb5"/>
+<path d="m211 258 19 67m-7-70 19 66" stroke="#d8bc83" stroke-width="4"/>
+<path d="m159 369 49-7 11 86-51 6Z" fill="#d5a47f"/>
+<path d="m168 373 11 74m2-77 11 74m2-76 11 75" stroke="#b98865" opacity=".7" stroke-width="2"/>
+<path d="m169 453 1 11m8-12 1 11m8-13 1 11m8-12 1 11m8-13 1 11" stroke="#bd8b67" stroke-width="2"/>
+<path d="M452 341q2-62 37-117m-37 99q-8-78-23-107m24 113q34-51 62-52" fill="none" stroke="#657957" stroke-width="4"/>
+<path d="M480 244q-1-41 35-48 5 37-35 48ZM445 274q-37-5-43-48 39 3 43 48ZM467 309q-2-35 42-48 0 36-42 48ZM448 313q-39-7-45-40 35-1 45 40ZM455 257q-26-23-12-58 28 22 12 58Z" fill="#718965"/>
+<path d="M480 244q14-13 30-42m-65 72-34-41m56 76 37-41m-56 45-38-32" fill="none" stroke="#4e6d4d" stroke-width="1.5"/>
+<path d="M422 340h68l-9 88q-23 11-49 0Z" fill="url(#pot)"/>
+<ellipse cx="456" cy="340" rx="34" ry="7" fill="#bf855d"/>
+<ellipse cx="456" cy="339" rx="26" ry="4" fill="#76634c"/>
+<path d="M89 367v78m-32-39h63" stroke="#8d704d" stroke-width="5"/>
+<ellipse cx="90" cy="365" rx="42" ry="11" fill="#b8996c"/>
+<path d="M67 347h38v9H67Z" fill="#e4bd83"/>
+<path d="M64 337h37v10H64Z" fill="#466b66"/>
+<path d="M77 316h18v20H77Z" fill="#f5f0e3"/>
+<path d="M95 319q14 0 8 12h-8" fill="none" stroke="#f5f0e3" stroke-width="4"/>
+</svg>

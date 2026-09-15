@@ -1,0 +1,22 @@
+{
+    "name": "aproape-marketplace",
+    "private": true,
+    "type": "module",
+    "engines": {
+        "node": ">=24 <25"
+    },
+    "scripts": {
+        "build": "vite build",
+        "dev": "vite --host 0.0.0.0",
+        "lint": "prettier --check resources/css/app.css resources/js/app.js vite.config.js package.json compose.yaml",
+        "format": "prettier --write resources/css/app.css resources/js/app.js vite.config.js package.json compose.yaml",
+        "test:browser": "playwright test"
+    },
+    "devDependencies": {
+        "@axe-core/playwright": "^4.13.0",
+        "@playwright/test": "^1.63.0",
+        "laravel-vite-plugin": "^3.1",
+        "prettier": "^3.6",
+        "vite": "^8.0.0"
+    }
+}
