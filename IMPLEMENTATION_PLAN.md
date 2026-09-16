@@ -1,12 +1,12 @@
 # Implementation plan
 
-Last updated: 2026-09-15. Repository: zenglowups/OlxV2, branch main.
+Last updated: 2026-09-16. Repository: zenglowups/OlxV2, branch main.
 The owner explicitly requested continued implementation of the full document on 2026-09-15.
 Complete and validate one milestone before starting the next; do not rebuild finished work.
 
 ## Execution state
 
-**M1 complete and verified; initial commit being recorded. M2 is next.**
+**M1 complete in commit 03eb66b. M2 complete and verified. M3 is next.**
 
 ### M1 completed
 - Laravel 13 / PHP 8.4 modular monolith; official scaffold and locked dependencies.
@@ -41,18 +41,38 @@ Complete and validate one milestone before starting the next; do not rebuild fin
 - Startup clears compiled code only; it does not flush Redis data, sessions or rate limits.
 
 ### Exact next task
-Commit M1, update persistent scope instructions, implement M2 authentication:
-email/password registration and login/logout, queued localized verification/reset emails,
-session revocation, account types and suspension/ban checks, stateful Google/Facebook OAuth
-boundaries without invented credentials. Add authorization/abuse tests and real browser flows.
+Implement M3: owner-managed individual/business profiles, unique public username,
+description and explicit visibility, safe avatar upload to S3, public profile with only approved
+public fields and real email/member-age evidence. Add privacy/ownership tests and browser flows.
+Listing/review sections must be integrated only when their real modules arrive (M7/M11).
+
+### M2 completed and validated — 2026-09-16
+- Real RO/EN registration/login/logout, individual/business types, password/session security.
+- Queued verification and password recovery, single-use reset, revocation of all sessions.
+- Email normalization plus database uniqueness; authenticated verification ownership and expiry.
+- Suspension/ban enforcement; rate limits; CSRF; no-store sensitive pages; malformed-input handling.
+- Stateful Google/Facebook Socialite boundary, no email-based automatic account linking or stored tokens.
+- Localized responsive forms and email templates; 403/419/429 recovery pages.
+- UTC application/database clock; Europe/Bucharest presentation; query strings removed from access logs.
+- Additive account migration applied; no development reset or .env overwrite.
+- PHPUnit: **34 passed, 628 assertions**, 6.75 seconds. Pint formatted 61 files.
+- Playwright: **16 passed**, 19.7 seconds. After queue refactor, all six authentication browser tests
+  passed again (17.9 seconds), including actual Mailpit delivery, verification, password reset,
+  another device's session rejection, relogin and all-session revocation on desktop/mobile.
+- CSRF rejection, keyboard navigation, RO/EN form switching, overflow and axe checks passed.
+- Desktop/mobile registration screenshots inspected; Windows app-browser navigation verified.
+- Composer strict validation and security audit passed; frontend lint/build passed.
+- Live infrastructure smoke passed again. Only UUID-labelled browser QA accounts were cleaned.
+- CSS 11.65 kB / 3.43 kB gzip, JS 0.23 kB / 0.17 kB gzip; no SPA/runtime framework added.
+- Google/Facebook live provider configuration remains external and untested; see docs/authentication.md.
 
 ## Milestones
 
 | # | Milestone | State |
 |---|---|---|
 | 1 | Engineering foundation | Complete |
-| 2 | Authentication and OAuth boundaries | Next |
-| 3 | Individual/business/public profiles and privacy | Pending |
+| 2 | Authentication and OAuth boundaries | Complete |
+| 3 | Individual/business/public profiles and privacy | Next |
 | 4 | Hierarchical categories and dynamic attributes/admin | Pending |
 | 5 | Posting wizard, private drafts, preview | Pending |
 | 6 | Secure image pipeline and S3 variants | Pending |

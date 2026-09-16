@@ -32,7 +32,7 @@ return [
     'near_title' => 'Room for another story',
     'near_text' => 'A more natural connection between people selling and those looking for something that fits.',
     'notice_title' => 'Building our beginning, with care.',
-    'notice_text' => 'The platform is in development. Listings, search and accounts will become available in the next stages.',
+    'notice_text' => 'The platform is in development. You can already create an account. Listings and search are in progress.',
     'footer' => 'Care for things. Respect for people.',
     'back_top' => 'Back to top',
     'error_404' => 'This page could not be found.',

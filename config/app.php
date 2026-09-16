@@ -65,7 +65,9 @@ return [
     |
     */
 
-    'timezone' => env('APP_TIMEZONE', 'UTC'),
+    // Persist and compare instants in UTC; localize only at the presentation boundary.
+    'timezone' => 'UTC',
+    'display_timezone' => env('DISPLAY_TIMEZONE', 'Europe/Bucharest'),
 
     /*
     |--------------------------------------------------------------------------

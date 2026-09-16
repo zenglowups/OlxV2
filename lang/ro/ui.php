@@ -32,7 +32,7 @@ return [
     'near_title' => 'Loc pentru o nouă poveste',
     'near_text' => 'O legătură mai firească între oamenii care vând și cei care caută ceva potrivit.',
     'notice_title' => 'Ne construim începutul, cu grijă.',
-    'notice_text' => 'Platforma este în dezvoltare. Publicarea anunțurilor, căutarea și conturile vor deveni disponibile în etapele următoare.',
+    'notice_text' => 'Platforma este în dezvoltare. Îți poți crea deja un cont. Publicarea anunțurilor și căutarea sunt în lucru.',
     'footer' => 'Cu grijă pentru lucruri. Cu respect pentru oameni.',
     'back_top' => 'Înapoi sus',
     'error_404' => 'Pagina nu a fost găsită.',

@@ -22,7 +22,7 @@ Tests cover:
 - Health status 200/503, minimal responses and session-independent readiness.
 - Real PostgreSQL migrations, persistence, unique email constraint, hashed/hidden password fields.
 
-No marketplace authorization is claimed yet; add policy and IDOR tests alongside each future feature.
+Authentication tests cover privilege-field rejection, sessions, bans/suspensions, rate limits, malformed input, signed email ownership/expiry, reset expiry/reuse, and OAuth state/email takeover. Add listing/profile policy and IDOR tests alongside those features.
 
 ## Frontend and browser
 
@@ -72,3 +72,14 @@ A workflow existing locally does not mean a hosted run has passed; see IMPLEMENT
 The dated execution state in IMPLEMENTATION_PLAN.md records actual counts, measurements,
 browser coverage and outstanding limitations. Performance at scale, full security review,
 backup restoration rehearsal and production deployment are separate release gates.
+
+## M2 real account workflow
+The browser suite creates only UUID-labelled QA accounts, checks real queued Mailpit messages,
+opens verification/reset links, confirms another session is revoked, checks all RO/EN forms with axe,
+and confirms CSRF failures. Clean only those recorded accounts after the run:
+
+```sh
+docker compose exec -T app php scripts/cleanup-browser-users.php
+```
+Do not flush Redis rate limits between retries; wait for the normal one-minute window if needed.
+External Google/Facebook tests use provider-contract doubles until real credentials are configured.

@@ -1,14 +1,16 @@
 # OLXv2 · Aproape
 
 A Romanian classifieds marketplace, built as a portable Laravel monolith.
-**Current scope: Milestone 1 — engineering foundation and responsive application shell.**
-Accounts, listings, search, contact reveal and marketplace features are not implemented yet.
+**Completed: M1 foundation and M2 authentication. Next: M3 profiles.**
+Registration, login, email verification, password recovery and session revocation work locally. Listings, search and contact reveal are still pending. See docs/authentication.md for setup and security decisions.
 The provisional public name **Aproape** is configured with `APP_NAME`; OLXv2 is an internal codename.
 
 ## Open the application
 
 - Application: **http://localhost:8088/ro**
 - English: **http://localhost:8088/en**
+- Create an account: **http://localhost:8088/ro/register**
+- Sign in: **http://localhost:8088/ro/login**
 - Mailpit (local email inbox): **http://localhost:8025**
 - MinIO console: **http://localhost:9001**
 - Liveness: **http://localhost:8088/up**

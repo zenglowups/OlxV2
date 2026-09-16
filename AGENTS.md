@@ -3,7 +3,7 @@
 Read IMPLEMENTATION_PLAN.md, docs/product-requirements.md, and recent commits before continuing.
 The original user request takes precedence over upstream scaffold recommendations.
 This repository uses Docker; PHP, Composer, databases and Node do not need host installations.
-The current task is Milestone 1 ONLY. Do not begin authentication until the owner says Continue.
+The owner said Continue and requested the full process on 2026-09-15. Implement milestones sequentially, validate and commit each before proceeding; see IMPLEMENTATION_PLAN.md for exact state.
 
 ## Architecture and product rules
 - Modular Laravel monolith; PHP, PostgreSQL, Redis, Blade, CSS, Vite, optional Alpine.
