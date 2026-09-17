@@ -1,0 +1,15 @@
+@extends('layouts.app')
+@section('title', $category?->label() ?? __('catalog.title'))
+@section('content')
+<section class="catalog-page container">
+<nav class="breadcrumbs" aria-label="{{ __('catalog.breadcrumb') }}"><a href="{{ route('home.localized') }}">{{ __('ui.home') }}</a><span aria-hidden="true">›</span><a href="{{ route('categories.index') }}">{{ __('catalog.all') }}</a>@foreach($ancestors as $ancestor)<span aria-hidden="true">›</span><a href="{{ route('categories.show',$ancestor->slug) }}" @if($loop->last) aria-current="page" @endif>{{ $ancestor->label() }}</a>@endforeach</nav>
+<header class="catalog-heading"><span class="category-icon"><x-icon :name="$category?->icon ?? 'grid'"/></span><div><p class="eyebrow">{{ __('catalog.browse') }}</p><h1>{{ $category?->label() ?? __('catalog.title') }}</h1><p>{{ $category?->description() ?: __('catalog.intro') }}</p></div></header>
+@if($categories->isNotEmpty())
+<h2 class="catalog-subtitle">{{ $category ? __('catalog.children') : __('catalog.all') }}</h2>
+<div class="category-grid">@foreach($categories as $item)<x-category-card :category="$item"/>@endforeach</div>
+{{ $categories->links('components.pagination') }}
+@else
+<div class="catalog-empty"><x-icon name="heart"/><h2>{{ __('catalog.leaf_title') }}</h2><p>{{ __('catalog.leaf_text') }}</p><a class="button button-primary" href="{{ auth()->check() ? route('profile.edit') : route('register') }}">{{ auth()->check() ? __('profile.edit') : __('ui.start') }}</a></div>
+@endif
+</section>
+@endsection

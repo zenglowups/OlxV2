@@ -1,4 +1,5 @@
 @import './marketplace.css';
+@import './catalog.css';
 @layer base, components, responsive;
 
 @layer base {

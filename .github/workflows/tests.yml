@@ -28,7 +28,14 @@ jobs:
         run: docker compose run --rm --no-deps assets sh -c 'npm run lint && npm run build'
       - name: Browser checks
         run: |
+          docker compose exec -T app php artisan db:seed --class=CategorySeeder --force
+          docker compose exec -T app php scripts/catalog-browser-fixture.php create
           docker compose run --rm --no-deps -e PLAYWRIGHT_BASE_URL=http://web browser
+      - name: Clean scoped browser fixtures
+        if: always()
+        run: |
+          docker compose exec -T app php scripts/catalog-browser-fixture.php clean
+          docker compose exec -T app php scripts/cleanup-browser-users.php
       - name: Service diagnostics
         if: failure()
         run: docker compose logs --tail 100

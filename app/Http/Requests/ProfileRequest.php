@@ -36,7 +36,7 @@ class ProfileRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'min:2', 'max:80'],
             'username' => ['required', 'string', 'min:3', 'max:32', 'regex:/^[a-z0-9][a-z0-9_]*$/D', Rule::notIn(['admin', 'administrator', 'support', 'aproape', 'system', 'api']), Rule::unique('seller_profiles')->ignore($profile?->id)],
-            'account_type' => ['required', Rule::in(['individual', 'business'])],
+            'account_type' => ['required', Rule::in($this->user()->is_admin ? ['individual'] : ['individual', 'business'])],
             'description' => ['nullable', 'string', 'max:1500'],
             'location_label' => ['nullable', 'string', 'max:100'],
             'business_name' => ['exclude_unless:account_type,business', 'required_if:account_type,business', 'string', 'max:160'],

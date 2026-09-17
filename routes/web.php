@@ -6,16 +6,18 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Auth\SessionController;
 use App\Http\Controllers\AvatarController;
+use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\SetLocale;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(SetLocale::class)->group(function (): void {
-    Route::view('/', 'home')->name('home');
-    Route::view('/{locale}', 'home')->whereIn('locale', ['ro', 'en'])->name('home.localized');
+    Route::get('/', [CatalogController::class, 'home'])->name('home');
+    Route::get('/{locale}', [CatalogController::class, 'home'])->whereIn('locale', ['ro', 'en'])->name('home.localized');
 });
 
 Route::prefix('{locale}')->whereIn('locale', ['ro', 'en'])->middleware(SetLocale::class)->group(function (): void {
+    require __DIR__.'/catalog.php';
     Route::get('/sellers/{profile:username}', [ProfileController::class, 'show'])->name('profile.show');
     Route::middleware(['auth', 'verified'])->group(function (): void {
         Route::get('/account/profile', [ProfileController::class, 'edit'])->name('profile.edit');

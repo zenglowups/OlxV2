@@ -3,7 +3,7 @@
 <div class="form-field">
     <label for="{{ $name }}">{{ $label }}</label>
     <input id="{{ $name }}" name="{{ $name }}" type="{{ $type }}" {{ $attributes->except('value') }}
-        @if($type !== 'password') value="{{ is_string($fieldValue) ? $fieldValue : '' }}" @endif
+        @if($type !== 'password') value="{{ is_string($fieldValue) || is_int($fieldValue) || is_float($fieldValue) ? $fieldValue : '' }}" @endif
         @if($errors->has($name)) aria-invalid="true" @endif
         @if($hint || $errors->has($name)) aria-describedby="{{ $name }}-help" @endif>
     @if($hint || $errors->has($name))

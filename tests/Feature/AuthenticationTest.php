@@ -30,13 +30,14 @@ class AuthenticationTest extends TestCase
     public function test_registration_persists_normalized_account_and_queues_verification_without_privilege_escalation(): void
     {
         Notification::fake();
-        $this->post('/en/register', $this->registration(['email' => 'SELLER@example.test', 'account_type' => 'business', 'status' => 'banned', 'auth_version' => 999, 'email_verified_at' => now()]))
+        $this->post('/en/register', $this->registration(['email' => 'SELLER@example.test', 'account_type' => 'business', 'status' => 'banned', 'is_admin' => true, 'auth_version' => 999, 'email_verified_at' => now()]))
             ->assertRedirect('/en/email/verify');
         $user = User::sole();
         $this->assertSame('seller@example.test', $user->email);
         $this->assertSame('en', $user->locale);
         $this->assertSame('business', $user->account_type);
         $this->assertSame('active', $user->status);
+        $this->assertFalse($user->is_admin);
         $this->assertSame(1, $user->auth_version);
         $this->assertNull($user->email_verified_at);
         $this->assertTrue(Hash::check('a sufficiently long password', $user->password));

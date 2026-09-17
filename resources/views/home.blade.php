@@ -24,6 +24,7 @@
     </div>
 </section>
 
+@include('catalog.home-section')
 <section class="home-section container" id="principii" aria-labelledby="principles-title">
     <div class="section-heading"><div><p class="eyebrow">{{ __('ui.section_eyebrow') }}</p><h2 id="principles-title">{{ __('ui.section_title') }}</h2></div><p>{{ __('ui.section_intro') }}</p></div>
     <div class="principles-grid">

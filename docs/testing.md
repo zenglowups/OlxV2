@@ -89,3 +89,8 @@ and cleanup retries. The desktop/mobile authentication workflow also edits the p
 real avatar to MinIO, publishes a business profile, checks protected data is absent from public HTML,
 and withdraws visibility. QA cleanup records avatar retirement before removing its own test accounts.
 The homepage and all profile/account screens receive axe and responsive screenshot checks.
+
+## M4 catalogue browser preparation
+The complete browser suite now needs explicit local admin QA fixtures and the initial taxonomy.
+See docs/catalog.md for create/test/clean commands. These never run during ordinary startup.
+The CI workflow performs the same setup and cleans only its UUID-labelled fixture data.

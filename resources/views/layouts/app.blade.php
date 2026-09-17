@@ -2,6 +2,7 @@
                 $languageRoute = request()->route()?->getName();
                 if (!$languageRoute || !in_array('locale', request()->route()?->parameterNames() ?? [], true)) $languageRoute = 'home.localized';
                 $languageParameters = array_intersect_key(request()->route()?->parameters() ?? [], array_flip(request()->route()?->parameterNames() ?? []));
+                if ($languageRoute === 'categories.show' && isset($languageParameters['category'])) $languageParameters['category'] = $languageParameters['category']->slug;
                 if ($languageRoute === 'password.reset') $languageParameters = array_merge($languageParameters, request()->only('token', 'email'));
             @endphp
 <!DOCTYPE html>
@@ -26,7 +27,7 @@
             <x-brand />
             <span class="brand-tagline">{{ __('ui.tagline') }}</span>
             <nav class="desktop-nav" aria-label="{{ __('ui.navigation') }}">
-                <a href="{{ route('home.localized', ['locale' => app()->getLocale()]) }}#despre">{{ __('ui.vision') }}</a>
+                <a href="{{ route('categories.index', ['locale' => app()->getLocale()]) }}">{{ __('catalog.all') }}</a>
                 <a href="{{ route('home.localized', ['locale' => app()->getLocale()]) }}#principii">{{ __('ui.principles') }}</a>
                 <a href="{{ auth()->check() ? route('account', ['locale' => app()->getLocale()]) : route('login', ['locale' => app()->getLocale()]) }}">{{ auth()->check() ? __('auth.account') : __('auth.login') }}</a>
             </nav>
@@ -39,7 +40,7 @@
             <details class="mobile-menu">
                 <summary aria-label="{{ __('ui.menu') }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></summary>
                 <nav aria-label="{{ __('ui.navigation') }}">
-                    <a href="{{ route('home.localized', ['locale' => app()->getLocale()]) }}#despre">{{ __('ui.vision') }}</a>
+                    <a href="{{ route('categories.index', ['locale' => app()->getLocale()]) }}">{{ __('catalog.all') }}</a>
                     <a href="{{ route('home.localized', ['locale' => app()->getLocale()]) }}#principii">{{ __('ui.principles') }}</a>
                 <a href="{{ auth()->check() ? route('account', ['locale' => app()->getLocale()]) : route('login', ['locale' => app()->getLocale()]) }}">{{ auth()->check() ? __('auth.account') : __('auth.login') }}</a>
                 </nav>

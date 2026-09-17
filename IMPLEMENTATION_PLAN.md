@@ -6,7 +6,7 @@ Complete and validate one milestone before starting the next; do not rebuild fin
 
 ## Execution state
 
-**M1 complete in commit 03eb66b. M2 complete in commit 89e0e2c. M3 profiles and visual interface complete (current checkpoint).**
+**M1 complete in commit 03eb66b. M2 complete in commit 89e0e2c. M3 complete in commit 327bcbb. M4 catalogue complete (current checkpoint).**
 
 ### M1 completed
 - Laravel 13 / PHP 8.4 modular monolith; official scaffold and locked dependencies.
@@ -41,11 +41,12 @@ Complete and validate one milestone before starting the next; do not rebuild fin
 - Startup clears compiled code only; it does not flush Redis data, sessions or rate limits.
 
 ### Exact next task
-Implement M4: database-driven hierarchical categories and dynamic attribute definitions,
-protected administrator management with audit history, initial real taxonomy and public category
-navigation integrated into the new homepage. Then M5–M7 posting wizard, images and real listings.
-Owner requested visible interface progress on 2026-09-17; keep extending the finished navy/teal
-interface alongside functional modules. No simulated inventory, reviews or metrics.
+Implement M5: private seller-owned drafts and a server-validated, resumable posting wizard.
+Reuse CategoryCatalog and AttributeValidator; support pricing modes, Romanian county/locality,
+contact preference and private preview. Persist partial progress with conflict-safe autosave.
+Add the photo step through M6, then actual publish/lifecycle in M7; do not advertise fake publishing.
+Continue the finished navy/teal responsive interface. Integrate profile listings/reviews in M7/M11.
+Owner requested faster visible progress on 2026-09-17 and said Continue again after catalogue work.
 
 ### M2 completed and validated — 2026-09-16
 - Real RO/EN registration/login/logout, individual/business types, password/session security.
@@ -83,6 +84,26 @@ interface alongside functional modules. No simulated inventory, reviews or metri
 - Pint: 74 files; frontend lint/build passed. CSS 26.64 kB / 6.51 kB gzip; JS 0.52 / 0.30 kB gzip.
 - Live infrastructure smoke passed (probe 04cae467-b89b-42c5-b508-d7492c8099a4).
 - See docs/profiles.md and docs/design-assets.md. Listings/reviews integrate in M7/M11.
+### M4 completed and validated — 2026-09-17
+- Nine real major categories, 23 subcategories and 12 initial typed attributes, seeded explicitly.
+- Original category cards on the homepage, category/child pages and localized breadcrumbs.
+- Database adjacency tree with recursive ancestry, inherited visibility and active dynamic fields.
+- Required/type/range/option validation service for future drafts and publishing.
+- Protected administrator category/attribute CRUD, parent search, password confirmation and rate limits.
+- Individual admin access command, session revocation, unassignable role and durable audit records.
+- Serialized structural changes reject cycles, duplicate slugs and inherited key conflicts.
+- Additive catalogue migration applied; initial seeder is idempotent and preserves administrator edits.
+- PHPUnit: **57 passed, 1,366 assertions**, 16.21 seconds.
+- Playwright: **20 passed**, 41.9 seconds; complete desktop/mobile registration/profile and catalogue/admin flows.
+- Four dedicated catalogue checks also passed (14.6 seconds). Screenshots and axe inspected.
+- Fixed numeric form defaults and category language URLs found during real-browser verification.
+- Browser workers bounded to four; long admin scenario has a 90-second limit with 15-second action timeouts.
+- Pint: 89 files; frontend lint/build passed. CSS 30.10 kB / 7.14 kB gzip, JS 0.52 / 0.30 kB gzip.
+- Live DB/S3/queue/scheduler/Mailpit smoke passed (probe 7ef67d19-bb80-435b-a06c-737adc68da6f).
+- Only exact UUID-labelled browser QA accounts/categories were cleaned. No user data or volumes reset.
+- Admin 2FA/full admin modules remain M14; no default production admin or external exposure.
+- See docs/catalog.md for data model, commands and QA setup.
+
 ## Milestones
 
 | # | Milestone | State |
@@ -90,7 +111,7 @@ interface alongside functional modules. No simulated inventory, reviews or metri
 | 1 | Engineering foundation | Complete |
 | 2 | Authentication and OAuth boundaries | Complete |
 | 3 | Individual/business/public profiles and privacy | Complete |
-| 4 | Hierarchical categories and dynamic attributes/admin | Pending |
+| 4 | Hierarchical categories and dynamic attributes/admin | Complete |
 | 5 | Posting wizard, private drafts, preview | Pending |
 | 6 | Secure image pipeline and S3 variants | Pending |
 | 7 | Publishing, lifecycle, editing, expiration, renewals | Pending |

@@ -15,20 +15,20 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 #[Fillable(['name', 'email', 'password', 'account_type', 'locale'])]
-#[Hidden(['email', 'password', 'remember_token', 'auth_version'])]
+#[Hidden(['email', 'password', 'remember_token', 'auth_version', 'is_admin'])]
 class User extends Authenticatable implements HasLocalePreference, MustVerifyEmail
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
-    protected $attributes = ['status' => 'active', 'auth_version' => 1, 'account_type' => 'individual', 'locale' => 'ro'];
+    protected $attributes = ['status' => 'active', 'is_admin' => false, 'auth_version' => 1, 'account_type' => 'individual', 'locale' => 'ro'];
 
     protected function casts(): array
     {
         return [
             'email_verified_at' => 'datetime',
             'suspended_until' => 'datetime',
-            'auth_version' => 'integer',
+            'auth_version' => 'integer', 'is_admin' => 'boolean',
             'password' => 'hashed',
         ];
     }
