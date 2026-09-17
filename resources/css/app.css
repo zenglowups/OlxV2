@@ -1,3 +1,4 @@
+@import './marketplace.css';
 @layer base, components, responsive;
 
 @layer base {
@@ -728,168 +729,318 @@
     }
 }
 
-/* Shared account forms */
-.auth-shell {
-    display: grid;
-    gap: 2rem;
-    padding-block: 3.5rem;
-    min-height: 65vh;
-    align-items: start;
-}
-.auth-intro h1 {
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    line-height: 1.12;
-    letter-spacing: -0.035em;
-    margin: 0 0 1.5rem;
-    overflow-wrap: anywhere;
-}
-.auth-intro p {
-    color: var(--muted);
-    max-width: 35rem;
-    overflow-wrap: anywhere;
-}
-.form-card {
-    padding: clamp(1.25rem, 4vw, 2.5rem);
-    border: 1px solid var(--line);
-    border-radius: 1rem;
-    background: white;
-    min-width: 0;
-}
-.form-card form {
-    display: grid;
-    gap: 1.25rem;
-    margin: 0 0 1.5rem;
-}
-.form-card h2 {
-    font-size: 1.25rem;
-}
-.form-card a:not(.button) {
-    text-decoration: underline;
-    color: #076c64;
-    text-underline-offset: 0.2em;
-}
-.form-card .button {
-    background: #086c63;
-    color: white;
-    border: 1px solid #086c63;
-    justify-content: center;
-    cursor: pointer;
-    width: 100%;
-    font: inherit;
-    font-weight: 650;
-}
-.form-card .secondary {
-    background: white;
-    border: 1px solid #6c8d89;
-    color: #075e58;
-    box-shadow: none;
-    margin-block: 0.5rem;
-}
-.form-field {
-    display: grid;
-    gap: 0.5rem;
-}
-.form-field label {
-    font-weight: 650;
-}
-.form-field input,
-.form-field select {
-    width: 100%;
-    min-height: 48px;
-    padding: 0.75rem;
-    border: 1px solid #78938f;
-    border-radius: 0.5rem;
-    font: inherit;
-    background: white;
-    color: #183136;
-}
-.form-field [aria-invalid='true'] {
-    border: 2px solid #ac2d27;
-}
-.field-hint,
-.field-error {
-    font-size: 0.875rem;
-    margin: 0;
-}
-.field-hint {
-    color: #52696d;
-}
-.field-error {
-    color: #9c2923;
-}
-.checkbox-field {
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    min-height: 44px;
-    cursor: pointer;
-}
-.checkbox-field input {
-    width: 22px;
-    height: 22px;
-    accent-color: #076c64;
-}
-.notice {
-    border: 1px solid;
-    border-radius: 0.65rem;
-    padding: 1rem;
-    margin-bottom: 1.5rem;
-    overflow-wrap: anywhere;
-}
-.notice.success {
-    border-color: #80a59e;
-    background: #eff9f5;
-    color: #07584e;
-}
-.notice.error {
-    border-color: #c38682;
-    background: #fff4f2;
-    color: #862820;
-}
-.notice h2 {
-    margin-top: 0;
-}
-.notice ul {
-    padding-left: 1.2rem;
-    margin-bottom: 0;
-}
-.notice.error a {
-    color: inherit;
-}
-.text-link {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-}
-.account-details {
-    display: grid;
-    gap: 0.5rem;
-    overflow-wrap: anywhere;
-}
-.account-details dt {
-    color: #52696d;
-}
-.account-details dd {
-    margin: 0 0 1rem;
-    font-weight: 650;
-}
-@media (min-width: 800px) {
+@layer components {
+    /* Shared account forms */
     .auth-shell {
-        grid-template-columns: 1fr 1fr;
-        gap: 5rem;
-        padding-block: 5rem;
+        display: grid;
+        gap: 2rem;
+        padding-block: 3.5rem;
+        min-height: 65vh;
+        align-items: start;
     }
-    .auth-intro {
-        padding-top: 2rem;
+    .auth-intro h1 {
+        font-size: clamp(2rem, 4vw, 3.5rem);
+        line-height: 1.12;
+        letter-spacing: -0.035em;
+        margin: 0 0 1.5rem;
+        overflow-wrap: anywhere;
     }
-}
+    .auth-intro p {
+        color: var(--muted);
+        max-width: 35rem;
+        overflow-wrap: anywhere;
+    }
+    .form-card {
+        padding: clamp(1.25rem, 4vw, 2.5rem);
+        border: 1px solid var(--line);
+        border-radius: 1rem;
+        background: white;
+        min-width: 0;
+    }
+    .form-card form {
+        display: grid;
+        gap: 1.25rem;
+        margin: 0 0 1.5rem;
+    }
+    .form-card h2 {
+        font-size: 1.25rem;
+    }
+    .form-card a:not(.button) {
+        text-decoration: underline;
+        color: #076c64;
+        text-underline-offset: 0.2em;
+    }
+    .form-card .button {
+        background: #086c63;
+        color: white;
+        border: 1px solid #086c63;
+        justify-content: center;
+        cursor: pointer;
+        width: 100%;
+        font: inherit;
+        font-weight: 650;
+    }
+    .form-card .secondary {
+        background: white;
+        border: 1px solid #6c8d89;
+        color: #075e58;
+        box-shadow: none;
+        margin-block: 0.5rem;
+    }
+    .form-field {
+        display: grid;
+        gap: 0.5rem;
+    }
+    .form-field label {
+        font-weight: 650;
+    }
+    .form-field input,
+    .form-field select {
+        width: 100%;
+        min-height: 48px;
+        padding: 0.75rem;
+        border: 1px solid #78938f;
+        border-radius: 0.5rem;
+        font: inherit;
+        background: white;
+        color: #183136;
+    }
+    .form-field [aria-invalid='true'] {
+        border: 2px solid #ac2d27;
+    }
+    .field-hint,
+    .field-error {
+        font-size: 0.875rem;
+        margin: 0;
+    }
+    .field-hint {
+        color: #52696d;
+    }
+    .field-error {
+        color: #9c2923;
+    }
+    .checkbox-field {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        min-height: 44px;
+        cursor: pointer;
+    }
+    .checkbox-field input {
+        width: 22px;
+        height: 22px;
+        accent-color: #076c64;
+    }
+    .notice {
+        border: 1px solid;
+        border-radius: 0.65rem;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        overflow-wrap: anywhere;
+    }
+    .notice.success {
+        border-color: #80a59e;
+        background: #eff9f5;
+        color: #07584e;
+    }
+    .notice.error {
+        border-color: #c38682;
+        background: #fff4f2;
+        color: #862820;
+    }
+    .notice h2 {
+        margin-top: 0;
+    }
+    .notice ul {
+        padding-left: 1.2rem;
+        margin-bottom: 0;
+    }
+    .notice.error a {
+        color: inherit;
+    }
+    .text-link {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+    }
+    .account-details {
+        display: grid;
+        gap: 0.5rem;
+        overflow-wrap: anywhere;
+    }
+    .account-details dt {
+        color: #52696d;
+    }
+    .account-details dd {
+        margin: 0 0 1rem;
+        font-weight: 650;
+    }
+    @media (min-width: 800px) {
+        .auth-shell {
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            padding-block: 5rem;
+        }
+        .auth-intro {
+            padding-top: 2rem;
+        }
+    }
 
-.verified-badge {
-    display: inline-flex;
-    padding: 0.45rem 0.75rem;
-    border: 1px solid #80a59e;
-    border-radius: 2rem;
-    color: #07584e;
-    background: #eff9f5;
-    font-weight: 600;
+    .verified-badge {
+        display: inline-flex;
+        padding: 0.45rem 0.75rem;
+        border: 1px solid #80a59e;
+        border-radius: 2rem;
+        color: #07584e;
+        background: #eff9f5;
+        font-weight: 600;
+    }
+
+    .profile-workspace {
+        padding-block: 3rem;
+    }
+    .page-heading {
+        max-width: 48rem;
+        margin-bottom: 2.5rem;
+    }
+    .page-heading h1 {
+        font-size: clamp(2rem, 4vw, 3.25rem);
+        line-height: 1.15;
+        letter-spacing: -0.035em;
+    }
+    .page-heading p {
+        color: var(--muted);
+    }
+    .profile-editor {
+        display: grid;
+        gap: 1.5rem;
+    }
+    .profile-sidebar {
+        padding: 1.5rem;
+        border: 1px solid var(--line);
+        border-radius: 1rem;
+        background: white;
+        align-self: start;
+        display: grid;
+        gap: 0.5rem;
+        overflow-wrap: anywhere;
+    }
+    .profile-sidebar h2,
+    .profile-sidebar p {
+        margin: 0.25rem 0;
+    }
+    .profile-sidebar a {
+        text-decoration: underline;
+        text-underline-offset: 0.2em;
+        color: var(--teal-dark);
+    }
+    .form-card fieldset {
+        min-width: 0;
+        border: 0;
+        border-bottom: 1px solid var(--line);
+        padding: 0 0 1.5rem;
+        margin: 0;
+        display: grid;
+        gap: 1.25rem;
+    }
+    .form-card legend {
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-bottom: 1.25rem;
+    }
+    .form-field textarea {
+        width: 100%;
+        min-height: 140px;
+        padding: 0.75rem;
+        font: inherit;
+        border: 1px solid #78938f;
+        border-radius: 0.5rem;
+        resize: vertical;
+    }
+    .form-field input[type='file'] {
+        font-size: 0.85rem;
+    }
+    .business-fields {
+        display: grid;
+        gap: 1.25rem;
+    }
+    .business-fields[hidden] {
+        display: none;
+    }
+    .profile-avatar,
+    .avatar-initial {
+        border-radius: 50%;
+        width: 128px;
+        height: 128px;
+        object-fit: cover;
+        border: 1px solid var(--line);
+        background: white;
+    }
+    .avatar-initial {
+        display: grid;
+        place-items: center;
+        color: var(--teal);
+        background: #edf5f0;
+        font-size: 3rem;
+        font-weight: 650;
+    }
+    .seller-hero {
+        padding: clamp(1.5rem, 4vw, 3rem);
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: 1.25rem;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1.5rem;
+    }
+    .seller-identity {
+        min-width: 0;
+        flex: 1 1 230px;
+        overflow-wrap: anywhere;
+    }
+    .seller-identity h1 {
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        margin: 0;
+        letter-spacing: -0.025em;
+        line-height: 1.2;
+    }
+    .seller-identity p {
+        color: var(--muted);
+    }
+    .real-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        font-size: 0.85rem;
+    }
+    .seller-about {
+        margin-top: 1.5rem;
+        padding: clamp(1.5rem, 4vw, 3rem);
+        background: #f3f7f3;
+        border-radius: 1.25rem;
+    }
+    .seller-about h2 {
+        margin-top: 0;
+    }
+    .seller-description {
+        white-space: pre-line;
+        overflow-wrap: anywhere;
+        max-width: 70ch;
+    }
+    .seller-location {
+        font-weight: 650;
+    }
+    .business-disclosure {
+        border-top: 1px solid var(--line);
+        margin-top: 2rem;
+        padding-top: 1rem;
+        color: var(--muted);
+    }
+    @media (min-width: 850px) {
+        .profile-editor {
+            grid-template-columns: 260px minmax(0, 1fr);
+            gap: 2rem;
+        }
+    }
 }

@@ -83,3 +83,9 @@ docker compose exec -T app php scripts/cleanup-browser-users.php
 ```
 Do not flush Redis rate limits between retries; wait for the normal one-minute window if needed.
 External Google/Facebook tests use provider-contract doubles until real credentials are configured.
+## M3 profile and design coverage
+ProfileTest validates ownership, visibility, privacy, business disclosure, actual image conversion
+and cleanup retries. The desktop/mobile authentication workflow also edits the profile, uploads a
+real avatar to MinIO, publishes a business profile, checks protected data is absent from public HTML,
+and withdraws visibility. QA cleanup records avatar retirement before removing its own test accounts.
+The homepage and all profile/account screens receive axe and responsive screenshot checks.

@@ -6,3 +6,5 @@ use Illuminate\Support\Facades\Schedule;
 Schedule::call(function (): void {
     Cache::store('redis')->put('scheduler:heartbeat', now()->toIso8601String(), 180);
 })->name('infrastructure-heartbeat')->everyMinute()->withoutOverlapping();
+
+Schedule::command('media:cleanup')->everyTenMinutes()->withoutOverlapping();

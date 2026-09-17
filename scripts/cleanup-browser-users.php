@@ -1,7 +1,10 @@
 <?php
 
+use App\Models\SellerProfile;
 use App\Models\User;
+use App\Services\Media\FileCleanup;
 use Illuminate\Contracts\Console\Kernel;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -28,9 +31,15 @@ foreach (file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
         $user = User::where('email', $record['email'])->where('name', $record['name'])->first();
         if ($user) {
             DB::table('password_reset_tokens')->where('email', $record['email'])->delete();
+            $profile = SellerProfile::where('user_id', $user->id)->first();
+            if ($profile?->avatar_path) {
+                $cleanup = app(FileCleanup::class);
+                $cleanup->remember($profile->avatar_path);
+            }
             $user->delete();
         }
     });
 }
+Artisan::call('media:cleanup');
 unlink($path);
 echo "Cleaned only the explicitly recorded browser QA accounts.\n";

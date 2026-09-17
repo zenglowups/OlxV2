@@ -6,14 +6,14 @@ test('localized shell, real navigation and loaded assets', async ({ page }, test
     page.on('pageerror', (error) => errors.push(error.message));
     await page.goto('/ro');
     await expect(page.locator('html')).toHaveAttribute('lang', 'ro');
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('Un nou început.');
-    await expect(page.locator('.home-illustration')).toHaveJSProperty('naturalWidth', 560);
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Lucruri bune.');
+    await expect(page.locator('.home-illustration')).toHaveJSProperty('naturalWidth', 1536);
     await page.screenshot({ path: testInfo.outputPath('shell.png'), fullPage: true });
-    await page.getByRole('link', { name: 'Descoperă ce pregătim' }).click();
+    await page.getByRole('link', { name: 'Descoperă Aproape' }).click();
     await expect(page).toHaveURL(/#principii$/);
     await page.getByRole('link', { name: 'EN', exact: true }).click();
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('A new beginning.');
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Good things.');
     await page.getByRole('link', { name: 'RO', exact: true }).click();
     await expect(page.locator('html')).toHaveAttribute('lang', 'ro');
     expect(errors).toEqual([]);
@@ -50,7 +50,7 @@ test('mobile menu works with keyboard and closes after navigation', async ({ pag
     await expect(menu).not.toHaveAttribute('open', '');
     await expect(menu.locator('summary')).toBeFocused();
     await menu.locator('summary').click();
-    await menu.getByRole('link', { name: 'Ce ne propunem' }).click();
+    await menu.getByRole('link', { name: 'Cum încep' }).click();
     await expect(menu).not.toHaveAttribute('open', '');
     await expect(page).toHaveURL(/#principii$/);
 });
@@ -59,5 +59,5 @@ test('unknown page has a useful recovery link', async ({ page }) => {
     const response = await page.goto('/not-a-page');
     expect(response.status()).toBe(404);
     await page.getByRole('link', { name: 'Înapoi la început' }).click();
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('Un nou început.');
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Lucruri bune.');
 });

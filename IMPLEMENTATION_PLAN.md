@@ -1,12 +1,12 @@
 # Implementation plan
 
-Last updated: 2026-09-16. Repository: zenglowups/OlxV2, branch main.
+Last updated: 2026-09-17. Repository: zenglowups/OlxV2, branch main.
 The owner explicitly requested continued implementation of the full document on 2026-09-15.
 Complete and validate one milestone before starting the next; do not rebuild finished work.
 
 ## Execution state
 
-**M1 complete in commit 03eb66b. M2 complete and verified. M3 is next.**
+**M1 complete in commit 03eb66b. M2 complete in commit 89e0e2c. M3 profiles and visual interface complete (current checkpoint).**
 
 ### M1 completed
 - Laravel 13 / PHP 8.4 modular monolith; official scaffold and locked dependencies.
@@ -41,10 +41,11 @@ Complete and validate one milestone before starting the next; do not rebuild fin
 - Startup clears compiled code only; it does not flush Redis data, sessions or rate limits.
 
 ### Exact next task
-Implement M3: owner-managed individual/business profiles, unique public username,
-description and explicit visibility, safe avatar upload to S3, public profile with only approved
-public fields and real email/member-age evidence. Add privacy/ownership tests and browser flows.
-Listing/review sections must be integrated only when their real modules arrive (M7/M11).
+Implement M4: database-driven hierarchical categories and dynamic attribute definitions,
+protected administrator management with audit history, initial real taxonomy and public category
+navigation integrated into the new homepage. Then M5–M7 posting wizard, images and real listings.
+Owner requested visible interface progress on 2026-09-17; keep extending the finished navy/teal
+interface alongside functional modules. No simulated inventory, reviews or metrics.
 
 ### M2 completed and validated — 2026-09-16
 - Real RO/EN registration/login/logout, individual/business types, password/session security.
@@ -66,13 +67,29 @@ Listing/review sections must be integrated only when their real modules arrive (
 - CSS 11.65 kB / 3.43 kB gzip, JS 0.23 kB / 0.17 kB gzip; no SPA/runtime framework added.
 - Google/Facebook live provider configuration remains external and untested; see docs/authentication.md.
 
+### M3 completed and validated — 2026-09-17
+- Owner-managed individual/business profiles, unique normalized usernames, biography and locality.
+- Explicit public visibility; private owner preview; banned/unverified/suspended profiles hidden.
+- Encrypted phone/CUI, opt-in CUI display, phone/email preference, no fabricated business verification.
+- Real private S3 avatar uploads, actual image decoding, EXIF orientation, 320px WebP, durable retirement.
+- New homepage editorial photo, navy/teal visual system, desktop header and mobile bottom navigation.
+- Redesigned account dashboard, profile editor and public profile; real data only.
+- Additive profile/deletion migrations applied during successful full Windows START; PHP EXIF installed.
+- PHPUnit: **46 passed, 989 assertions**, 8.11 seconds, no warnings.
+- Playwright: **16 passed**, 29.2 seconds, including real S3 upload, private/public transitions,
+  business profile, no leaked contact/CUI, real email verification/reset and revoked sessions.
+- Desktop/mobile homepage/account/profile screenshots inspected. Axe and 320–1440px overflow checks passed.
+- Fixed error-page locale links, text contrast and an unclosed account template found in verification.
+- Pint: 74 files; frontend lint/build passed. CSS 26.64 kB / 6.51 kB gzip; JS 0.52 / 0.30 kB gzip.
+- Live infrastructure smoke passed (probe 04cae467-b89b-42c5-b508-d7492c8099a4).
+- See docs/profiles.md and docs/design-assets.md. Listings/reviews integrate in M7/M11.
 ## Milestones
 
 | # | Milestone | State |
 |---|---|---|
 | 1 | Engineering foundation | Complete |
 | 2 | Authentication and OAuth boundaries | Complete |
-| 3 | Individual/business/public profiles and privacy | Next |
+| 3 | Individual/business/public profiles and privacy | Complete |
 | 4 | Hierarchical categories and dynamic attributes/admin | Pending |
 | 5 | Posting wizard, private drafts, preview | Pending |
 | 6 | Secure image pipeline and S3 variants | Pending |

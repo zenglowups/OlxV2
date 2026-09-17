@@ -9,7 +9,7 @@ class TranslationCatalogTest extends TestCase
     public function test_both_languages_cover_the_same_non_empty_messages(): void
     {
         $root = dirname(__DIR__, 2);
-        foreach (['ui', 'auth'] as $file) {
+        foreach (['ui', 'auth', 'profile'] as $file) {
             $ro = require $root.'/lang/ro/'.$file.'.php';
             $en = require $root.'/lang/en/'.$file.'.php';
             $this->assertSame(array_keys($ro), array_keys($en));

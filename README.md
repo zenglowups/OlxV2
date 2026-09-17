@@ -1,8 +1,8 @@
 # OLXv2 · Aproape
 
 A Romanian classifieds marketplace, built as a portable Laravel monolith.
-**Completed: M1 foundation and M2 authentication. Next: M3 profiles.**
-Registration, login, email verification, password recovery and session revocation work locally. Listings, search and contact reveal are still pending. See docs/authentication.md for setup and security decisions.
+**Completed: M1 foundation, M2 authentication, M3 profiles and responsive visual interface. Next: M4 categories.**
+Registration, login, email verification, password recovery, session revocation and individual/business profiles with private S3 avatars work locally. Listings, search and contact reveal are still pending. See docs/authentication.md for setup and security decisions.
 The provisional public name **Aproape** is configured with `APP_NAME`; OLXv2 is an internal codename.
 
 ## Open the application

@@ -5,6 +5,8 @@ use App\Http\Controllers\Auth\OAuthController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Auth\SessionController;
+use App\Http\Controllers\AvatarController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\SetLocale;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +16,12 @@ Route::middleware(SetLocale::class)->group(function (): void {
 });
 
 Route::prefix('{locale}')->whereIn('locale', ['ro', 'en'])->middleware(SetLocale::class)->group(function (): void {
+    Route::get('/sellers/{profile:username}', [ProfileController::class, 'show'])->name('profile.show');
+    Route::middleware(['auth', 'verified'])->group(function (): void {
+        Route::get('/account/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::put('/account/profile', [ProfileController::class, 'update'])->middleware('throttle:profile')->name('profile.update');
+        Route::get('/account/profile/preview', [ProfileController::class, 'preview'])->name('profile.preview');
+    });
     Route::middleware('guest')->group(function (): void {
         Route::get('/register', [RegistrationController::class, 'create'])->name('register');
         Route::post('/register', [RegistrationController::class, 'store'])->middleware('throttle:register');
@@ -37,3 +45,5 @@ Route::prefix('{locale}')->whereIn('locale', ['ro', 'en'])->middleware(SetLocale
 // Fixed callback URLs can be registered with the providers; original locale stays in the session.
 Route::get('/oauth/{provider}/callback', [OAuthController::class, 'callback'])
     ->whereIn('provider', ['google', 'facebook'])->middleware(['guest', 'throttle:oauth'])->name('oauth.callback');
+
+Route::get('/media/avatars/{avatar}', AvatarController::class)->whereUuid('avatar')->name('avatar');

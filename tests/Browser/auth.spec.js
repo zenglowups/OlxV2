@@ -51,6 +51,47 @@ test('registration, real queued email, verification, reset, session revocation a
     expect((await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa','wcag22aa']).analyze()).violations).toEqual([]);
     await page.screenshot({path:testInfo.outputPath('account.png'),fullPage:true});
 
+
+    const username = 'qa_' + id.replaceAll('-', '').slice(0, 24);
+    await page.goto('/ro/account/profile');
+    await page.getByLabel('Nume de utilizator', {exact:true}).fill(username);
+    await page.getByLabel('Despre tine', {exact:true}).fill('Îmi plac lucrurile îngrijite și poveștile lor.');
+    await page.getByLabel('Localitate', {exact:true}).fill('Cluj-Napoca');
+    await page.getByLabel('Telefon', {exact:true}).fill('0722 123 456');
+    await page.getByLabel('Fotografie sau logo', {exact:true}).setInputFiles('tests/fixtures/avatar.png');
+    await page.getByRole('button', {name:'Salvează profilul',exact:true}).click();
+    await expect(page.getByRole('status')).toContainText('Profilul a fost salvat.');
+    await expect(page.locator('.profile-sidebar img')).toHaveJSProperty('naturalWidth',320);
+    const avatar = await page.locator('.profile-sidebar img').getAttribute('src');
+    const guest = await browser.newContext({baseURL});
+    const publicPage = await guest.newPage();
+    expect((await guest.request.get(new URL(avatar).pathname)).status()).toBe(404);
+    expect((await publicPage.goto('/ro/sellers/' + username)).status()).toBe(404);
+    await page.getByLabel('Afișează profilul meu public',{exact:true}).check();
+    await page.getByLabel('Tipul contului',{exact:true}).selectOption('business');
+    await page.getByLabel('Numele firmei',{exact:true}).fill('Atelierul Aproape QA');
+    await page.getByLabel('CUI / CIF',{exact:true}).fill('RO12345678');
+    await page.getByRole('button', {name:'Salvează profilul',exact:true}).click();
+    await expect(page.getByRole('status')).toContainText('Profilul a fost salvat.');
+    expect((await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa','wcag22aa']).analyze()).violations).toEqual([]);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    await page.screenshot({path:testInfo.outputPath('profile-edit.png'),fullPage:true});
+    expect((await publicPage.goto('/ro/sellers/' + username)).status()).toBe(200);
+    await expect(publicPage.getByRole('heading',{level:1})).toHaveText('Atelierul Aproape QA');
+    await expect(publicPage.locator('.profile-avatar')).toHaveJSProperty('naturalWidth',320);
+    const publicHTML = await publicPage.content();
+    expect(publicHTML).not.toContain(email);
+    expect(publicHTML).not.toContain('40722123456');
+    expect(publicHTML).not.toContain('RO12345678');
+    expect((await new AxeBuilder({page:publicPage}).withTags(['wcag2a','wcag2aa','wcag21aa','wcag22aa']).analyze()).violations).toEqual([]);
+    await publicPage.screenshot({path:testInfo.outputPath('public-profile.png'),fullPage:true});
+    await page.getByLabel('Afișează profilul meu public',{exact:true}).uncheck();
+    await page.getByRole('button', {name:'Salvează profilul',exact:true}).click();
+    await expect(page.getByRole('status')).toContainText('Profilul a fost salvat.');
+    expect((await publicPage.goto('/ro/sellers/' + username)).status()).toBe(404);
+    await guest.close();
+    await page.goto('/ro/account');
+
     const second = await browser.newContext({baseURL});
     const other = await second.newPage();
     await other.goto('/ro/login');

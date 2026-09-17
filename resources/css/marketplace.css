@@ -1,0 +1,970 @@
+/* Original Aproape visual system: shared by real marketplace workflows. */
+:root {
+    --ink: #102747;
+    --muted: #54677f;
+    --teal: #007d80;
+    --teal-dark: #00666b;
+    --paper: #f6f8fb;
+    --line: #e0e7ee;
+    --gold: #9c6d29;
+}
+body {
+    color: var(--ink);
+    background: var(--paper);
+}
+.icon {
+    width: 24px;
+    height: 24px;
+    flex: 0 0 auto;
+}
+h1,
+h2,
+h3 {
+    text-wrap: balance;
+}
+.button {
+    border: 1px solid transparent;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 650;
+    min-height: 48px;
+    gap: 10px;
+    cursor: pointer;
+    border-radius: 12px;
+}
+.button-primary {
+    margin-top: 0;
+    background: linear-gradient(135deg, #008d91, #006b72);
+    color: #fff;
+    box-shadow: 0 4px 10px #006a7218;
+}
+.button-primary:hover {
+    background: #00666b;
+    color: white;
+}
+.button.secondary {
+    background: white;
+    border: 1px solid #8cafb5;
+    color: #00666b;
+}
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 3px solid #007d80;
+    outline-offset: 3px;
+}
+.site-header {
+    background: #fff;
+}
+.header-inner {
+    min-height: 82px;
+    gap: 20px;
+}
+.brand {
+    color: #102747;
+    font-weight: 800;
+    font-size: 30px;
+}
+.brand-tagline {
+    max-width: 170px;
+    font-size: 11px;
+    line-height: 1.5;
+}
+.desktop-nav {
+    gap: 24px;
+}
+.desktop-nav a {
+    font-size: 13px;
+}
+.header-action {
+    white-space: nowrap;
+    padding-inline: 18px;
+    min-height: 44px;
+    font-size: 12px;
+}
+.language-switch {
+    margin-left: 0;
+    padding: 2px;
+    border: 0;
+    background: #f0f4f8;
+}
+.language-switch a {
+    min-width: 34px;
+    min-height: 36px;
+}
+.language-switch a[aria-current] {
+    background: #fff;
+    color: #00686e;
+    box-shadow: 0 1px 4px #183a5312;
+}
+.mobile-bottom {
+    display: none;
+}
+.eyebrow {
+    font-size: 10px;
+    letter-spacing: 1.8px;
+    color: #006e76;
+    margin-bottom: 14px;
+}
+.welcome {
+    padding-block: 32px 0;
+}
+.welcome-card {
+    border: 1px solid #e6eaeb;
+    border-radius: 24px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1.06fr 1fr;
+    min-height: 456px;
+    background: #fff;
+    box-shadow: 0 10px 35px #1a395806;
+}
+.welcome-copy {
+    padding: 58px 36px 48px 44px;
+    position: relative;
+    z-index: 1;
+    align-self: center;
+}
+.welcome h1 {
+    font-size: clamp(40px, 4.6vw, 62px);
+    line-height: 1.1;
+    letter-spacing: -2.7px;
+    font-weight: 760;
+}
+.welcome h1 span {
+    color: var(--teal);
+}
+.welcome-intro {
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.75;
+    max-width: 390px;
+    margin-top: 24px;
+}
+.welcome-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    margin-top: 28px;
+}
+.text-link {
+    gap: 9px;
+    color: #006c74;
+    font-size: 14px;
+    font-weight: 600;
+}
+.welcome-note {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #53677c;
+    font-size: 12px;
+    margin-top: 21px;
+}
+.small-check {
+    display: inline-grid;
+    place-items: center;
+    width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    color: #006d72;
+    background: #e5f2f0;
+    font-size: 12px;
+}
+.welcome-photo {
+    position: relative;
+    min-width: 0;
+    min-height: 390px;
+    background: #ebe6db;
+}
+.welcome-photo picture,
+.welcome-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.welcome-photo img {
+    object-fit: cover;
+    object-position: 61% center;
+    max-height: none;
+}
+.photo-caption {
+    position: absolute;
+    bottom: 28px;
+    left: 24px;
+    right: 24px;
+    width: fit-content;
+    max-width: calc(100% - 48px);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    background: #ffffffed;
+    border-radius: 14px;
+    box-shadow: 0 8px 25px #28352c10;
+    font-size: 12px;
+    color: #36506a;
+}
+.photo-caption strong {
+    display: block;
+    color: var(--ink);
+    margin-top: 4px;
+    font-size: 13px;
+}
+.caption-mark {
+    font-size: 35px;
+    color: var(--gold);
+    line-height: 1;
+}
+.confidence-strip {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding: 24px 8px;
+    border-bottom: 1px solid var(--line);
+    gap: 24px;
+}
+.confidence-strip > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 13px;
+    font-size: 13px;
+    font-weight: 650;
+}
+.confidence-strip .icon {
+    color: #00777b;
+    width: 29px;
+    height: 29px;
+}
+.confidence-strip small {
+    display: block;
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--muted);
+    margin-top: 5px;
+}
+.home-section {
+    padding-block: 46px 42px;
+}
+.section-heading {
+    align-items: flex-end;
+    gap: 32px;
+    margin-bottom: 25px;
+}
+.section-heading h2 {
+    font-size: 28px;
+    font-weight: 730;
+    letter-spacing: -0.8px;
+}
+.section-heading > p {
+    font-size: 13px;
+    max-width: 370px;
+}
+.principles-grid {
+    gap: 18px;
+}
+.principle {
+    border-radius: 16px;
+    padding: 25px;
+    background: white;
+    border-color: var(--line);
+}
+.principle-icon {
+    background: #e8f4f3;
+    color: #006e75;
+    border-radius: 12px;
+    width: 46px;
+    height: 46px;
+}
+.principle h3 {
+    font-size: 18px;
+    font-weight: 700;
+}
+.principle p {
+    font-size: 14px;
+    line-height: 1.75;
+}
+.principle .text-link {
+    margin-top: 13px;
+}
+.principle-number {
+    color: #586c83;
+}
+.join-section {
+    padding-bottom: 40px;
+}
+.join-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 28px;
+    padding: 30px 36px;
+    background: #eef5f5;
+    border: 1px solid #dceaea;
+    border-radius: 18px;
+}
+.join-card h2 {
+    font-size: 25px;
+    letter-spacing: -0.6px;
+}
+.join-card p:not(.eyebrow) {
+    color: var(--muted);
+    margin-top: 7px;
+    font-size: 14px;
+}
+.join-card .eyebrow {
+    margin-bottom: 9px;
+}
+.join-card .button {
+    flex: 0 0 auto;
+}
+.availability-note {
+    margin-top: 18px;
+    text-align: center;
+    font-size: 12px;
+    color: #5c6e80;
+}
+.site-footer {
+    padding-block: 25px;
+}
+.footer-inner p {
+    font-size: 12px;
+}
+.auth-shell {
+    padding-block: 52px;
+    gap: 44px;
+}
+.auth-intro {
+    padding-top: 20px;
+}
+.auth-intro h1 {
+    color: var(--ink);
+    font-size: clamp(32px, 4vw, 46px);
+    font-weight: 740;
+}
+.form-card {
+    border-radius: 18px;
+    box-shadow: 0 5px 22px #24415b04;
+}
+.form-field input,
+.form-field select,
+.form-field textarea {
+    border-color: #a1b0bf;
+    color: #152d48;
+    border-radius: 9px;
+    min-height: 49px;
+}
+.form-field label {
+    font-size: 14px;
+}
+.form-card .button {
+    background: #007a80;
+    border-color: #007a80;
+    border-radius: 11px;
+    font-size: 14px;
+}
+.form-card .secondary {
+    color: #00666b;
+    background: white;
+}
+.form-card a:not(.button),
+.profile-sidebar a {
+    color: #006e76;
+}
+.field-hint {
+    color: #53677d;
+    font-size: 12px;
+    line-height: 1.6;
+}
+.checkbox-field {
+    font-size: 14px;
+}
+.checkbox-field input {
+    accent-color: #007a80;
+    flex-shrink: 0;
+}
+.verified-badge {
+    border: 0;
+    border-radius: 8px;
+    background: #e9f6f2;
+    color: #00685d;
+    font-size: 12px;
+    padding: 7px 10px;
+}
+.profile-workspace {
+    padding-block: 36px 50px;
+}
+.page-heading {
+    max-width: 100%;
+    margin-bottom: 24px;
+    padding: 28px 32px;
+    background: linear-gradient(105deg, #edf6f6, #f8fafb);
+    border-radius: 18px;
+    border: 1px solid #e0ebef;
+}
+.page-heading h1 {
+    font-size: clamp(28px, 3.6vw, 40px);
+    font-weight: 760;
+    letter-spacing: -1.3px;
+}
+.page-heading p:not(.eyebrow) {
+    font-size: 14px;
+    margin-top: 12px;
+}
+.profile-sidebar {
+    padding: 25px;
+    border-radius: 16px;
+    gap: 6px;
+}
+.profile-sidebar h2 {
+    font-size: 19px;
+}
+.profile-sidebar p {
+    font-size: 12px;
+    color: var(--muted);
+}
+.profile-sidebar .text-link {
+    font-size: 13px;
+}
+.profile-sidebar .profile-avatar {
+    margin-bottom: 12px;
+}
+.profile-avatar {
+    border: 4px solid white;
+    box-shadow: 0 0 0 1px #e0e7ee;
+}
+.seller-hero {
+    border-radius: 20px;
+    padding: 36px;
+    background: linear-gradient(120deg, #fff 55%, #eaf4f4);
+    gap: 28px;
+}
+.seller-identity .eyebrow {
+    margin-bottom: 8px;
+}
+.seller-identity h1 {
+    font-weight: 750;
+}
+.seller-identity p {
+    font-size: 14px;
+}
+.seller-identity .username {
+    color: #00727a;
+    font-weight: 550;
+    margin-block: 6px;
+}
+.real-badges {
+    margin-top: 16px;
+}
+.seller-about {
+    border: 1px solid var(--line);
+    background: #fff;
+    padding: 32px;
+    border-radius: 18px;
+}
+.seller-about h2 {
+    font-size: 22px;
+    margin-bottom: 14px;
+}
+.seller-description {
+    font-size: 15px;
+    color: var(--muted);
+    min-height: 40px;
+}
+.seller-location {
+    color: #006d75;
+    font-size: 14px;
+    margin-top: 20px;
+}
+.account-workspace {
+    padding-block: 40px 56px;
+}
+.account-welcome {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    padding: 30px 32px;
+    border: 1px solid #e0ebef;
+    border-radius: 20px;
+    background: linear-gradient(110deg, #eef6f6, #fff);
+}
+.account-welcome > div {
+    min-width: 0;
+    flex: 1 1 300px;
+}
+.account-welcome h1 {
+    font-size: clamp(28px, 3.3vw, 42px);
+    font-weight: 750;
+    letter-spacing: -1.3px;
+    overflow-wrap: anywhere;
+}
+.account-welcome p:not(.eyebrow) {
+    color: var(--muted);
+    font-size: 14px;
+    margin-top: 12px;
+}
+.account-summary {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin-block: 22px;
+}
+.account-summary article {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 15px;
+    padding: 24px;
+}
+.summary-icon {
+    display: grid;
+    place-items: center;
+    background: #e8f5f3;
+    color: #00757b;
+    width: 48px;
+    height: 48px;
+    border-radius: 13px;
+    flex: 0 0 auto;
+}
+.summary-icon.gold {
+    color: var(--gold);
+    background: #faf2e3;
+}
+.account-summary strong {
+    font-size: 16px;
+}
+.account-summary p {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 4px;
+}
+.account-columns {
+    display: grid;
+    grid-template-columns: 1fr 1.35fr;
+    gap: 22px;
+    align-items: start;
+}
+.account-panel {
+    padding: 30px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: white;
+}
+.account-panel h2 {
+    font-size: 22px;
+    margin-top: 20px;
+}
+.account-panel > p {
+    color: var(--muted);
+    font-size: 14px;
+    margin-block: 10px 20px;
+}
+.account-details {
+    font-size: 13px;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+}
+.account-details dd {
+    color: var(--ink);
+}
+.text-button {
+    background: transparent;
+    border: 0;
+    min-height: 44px;
+    padding: 5px 0;
+    font: inherit;
+    font-size: 14px;
+    color: #006e76;
+    cursor: pointer;
+}
+.security-card h2 {
+    font-size: 23px;
+    margin-bottom: 10px;
+}
+.security-card > p:not(.eyebrow) {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 24px;
+}
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1320px;
+    }
+}
+@media (max-width: 1100px) {
+    .brand-tagline {
+        display: none;
+    }
+    .header-inner {
+        gap: 16px;
+    }
+    .welcome-copy {
+        padding: 36px 28px;
+    }
+    .welcome h1 {
+        font-size: 46px;
+    }
+    .account-summary article {
+        padding: 20px;
+        gap: 12px;
+    }
+}
+@media (max-width: 850px) {
+    .welcome-card {
+        grid-template-columns: 1fr 0.9fr;
+        min-height: 390px;
+    }
+    .welcome h1 {
+        font-size: 38px;
+        letter-spacing: -1.7px;
+    }
+    .welcome-intro {
+        font-size: 14px;
+    }
+    .welcome-actions {
+        gap: 10px;
+    }
+    .welcome-photo {
+        min-height: 370px;
+    }
+    .photo-caption {
+        padding: 12px;
+        left: 14px;
+        right: 14px;
+        bottom: 18px;
+        max-width: calc(100% - 28px);
+    }
+    .confidence-strip {
+        gap: 16px;
+    }
+    .confidence-strip > div {
+        font-size: 11px;
+        gap: 9px;
+    }
+    .confidence-strip small {
+        font-size: 10px;
+    }
+    .account-summary {
+        gap: 12px;
+    }
+    .account-summary article {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .account-summary strong {
+        font-size: 14px;
+    }
+}
+@media (max-width: 760px) {
+    body {
+        padding-bottom: 68px;
+    }
+    .container {
+        padding-inline: 20px;
+    }
+    .header-inner {
+        min-height: 72px;
+        gap: 10px;
+    }
+    .brand {
+        font-size: 28px;
+        letter-spacing: -1px;
+    }
+    .brand-symbol {
+        width: 30px;
+        height: 30px;
+    }
+    .header-action {
+        display: none;
+    }
+    .language-switch {
+        margin-left: auto;
+    }
+    .language-switch a {
+        min-width: 31px;
+        min-height: 36px;
+    }
+    .mobile-menu {
+        display: block;
+    }
+    .mobile-menu summary {
+        width: 42px;
+        height: 44px;
+    }
+    .mobile-menu nav {
+        z-index: 20;
+    }
+    .welcome {
+        padding-top: 20px;
+    }
+    .welcome-card {
+        grid-template-columns: 1fr;
+        border-radius: 18px;
+    }
+    .welcome-copy {
+        padding: 30px 24px;
+    }
+    .welcome h1 {
+        font-size: clamp(35px, 8vw, 47px);
+        letter-spacing: -1.9px;
+    }
+    .welcome-intro {
+        margin-top: 16px;
+        font-size: 14px;
+        max-width: 440px;
+    }
+    .welcome-actions {
+        margin-top: 22px;
+        gap: 12px;
+    }
+    .welcome-actions .button {
+        padding-inline: 17px;
+        font-size: 13px;
+    }
+    .welcome-actions .text-link {
+        font-size: 12px;
+    }
+    .welcome-note {
+        font-size: 11px;
+        margin-top: 16px;
+    }
+    .welcome-photo {
+        height: 240px;
+        min-height: 0;
+    }
+    .welcome-photo img {
+        object-position: center 56%;
+    }
+    .photo-caption {
+        left: 18px;
+        bottom: 16px;
+        padding: 11px 15px;
+        font-size: 11px;
+        gap: 10px;
+    }
+    .photo-caption strong {
+        font-size: 12px;
+    }
+    .caption-mark {
+        font-size: 30px;
+    }
+    .confidence-strip {
+        padding: 21px 0;
+        gap: 12px;
+    }
+    .confidence-strip > div {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+        line-height: 1.45;
+        font-size: 11px;
+    }
+    .confidence-strip small {
+        display: none;
+    }
+    .confidence-strip .icon {
+        width: 24px;
+        height: 24px;
+    }
+    .home-section {
+        padding-block: 32px;
+    }
+    .section-heading {
+        gap: 13px;
+        margin-bottom: 22px;
+    }
+    .section-heading h2 {
+        font-size: 26px;
+    }
+    .section-heading > p {
+        font-size: 13px;
+        max-width: 100%;
+    }
+    .principle {
+        padding: 23px;
+    }
+    .principle-top {
+        margin-bottom: 18px;
+    }
+    .join-card {
+        padding: 25px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+        border-radius: 16px;
+    }
+    .join-card h2 {
+        font-size: 24px;
+    }
+    .join-section {
+        padding-bottom: 27px;
+    }
+    .availability-note {
+        font-size: 11px;
+        text-align: left;
+        padding-inline: 2px;
+    }
+    .mobile-bottom {
+        position: fixed;
+        display: flex;
+        justify-content: space-around;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #fffffff7;
+        border-top: 1px solid #dce5ed;
+        z-index: 30;
+        min-height: 66px;
+        padding: 6px 16px max(6px, env(safe-area-inset-bottom));
+    }
+    .mobile-bottom a {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 3px;
+        min-width: 72px;
+        min-height: 48px;
+        font-size: 10px;
+        color: #516982;
+        font-weight: 600;
+    }
+    .mobile-bottom a[aria-current] {
+        color: #00757c;
+    }
+    .mobile-bottom .icon {
+        width: 22px;
+        height: 22px;
+    }
+    .mobile-bottom .nav-profile .icon {
+        padding: 9px;
+        width: 42px;
+        height: 42px;
+        margin-top: -19px;
+        border-radius: 50%;
+        color: white;
+        background: #007a80;
+        box-shadow: 0 3px 9px #00666b30;
+    }
+    .auth-shell {
+        padding-block: 30px;
+        gap: 26px;
+    }
+    .auth-intro {
+        padding-top: 0;
+    }
+    .auth-intro h1 {
+        font-size: 32px;
+        margin-bottom: 13px;
+    }
+    .profile-workspace {
+        padding-block: 24px 35px;
+    }
+    .page-heading {
+        padding: 23px;
+        border-radius: 15px;
+    }
+    .page-heading h1 {
+        font-size: 29px;
+    }
+    .page-heading p:not(.eyebrow) {
+        font-size: 13px;
+    }
+    .profile-editor {
+        gap: 18px;
+    }
+    .profile-sidebar {
+        padding: 20px;
+    }
+    .seller-hero {
+        padding: 25px;
+        gap: 20px;
+    }
+    .seller-hero .profile-avatar,
+    .seller-hero .avatar-initial {
+        width: 96px;
+        height: 96px;
+    }
+    .seller-identity {
+        flex-basis: 190px;
+    }
+    .seller-identity h1 {
+        font-size: 28px;
+    }
+    .seller-about {
+        padding: 24px;
+    }
+    .seller-about h2 {
+        font-size: 21px;
+    }
+    .account-workspace {
+        padding-block: 24px 36px;
+    }
+    .account-welcome {
+        padding: 24px;
+        border-radius: 16px;
+        gap: 20px;
+    }
+    .account-welcome h1 {
+        font-size: 29px;
+    }
+    .account-summary {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-block: 18px;
+    }
+    .account-summary article {
+        flex-direction: row;
+        padding: 17px 20px;
+        align-items: center;
+    }
+    .summary-icon {
+        width: 42px;
+        height: 42px;
+    }
+    .account-columns {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+    .account-panel {
+        padding: 24px;
+    }
+}
+@media (max-width: 360px) {
+    .container {
+        padding-inline: 15px;
+    }
+    .brand {
+        font-size: 24px;
+    }
+    .header-inner {
+        gap: 7px;
+    }
+    .brand-symbol {
+        width: 27px;
+    }
+    .language-switch a {
+        min-width: 28px;
+    }
+    .welcome-copy {
+        padding: 26px 20px;
+    }
+    .welcome h1 {
+        font-size: 34px;
+    }
+    .welcome-actions {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    .welcome-photo {
+        height: 205px;
+    }
+}

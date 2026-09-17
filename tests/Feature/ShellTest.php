@@ -8,17 +8,17 @@ class ShellTest extends TestCase
 {
     public function test_home_is_server_rendered_in_romanian(): void
     {
-        $this->get('/')->assertOk()->assertSee('Un nou început.')
-            ->assertSee('lang="ro"', false)->assertSee('În pregătire')
-            ->assertSee('Îți poți crea deja un cont.')
+        $this->get('/')->assertOk()->assertSee('Lucruri bune.')
+            ->assertSee('lang="ro"', false)->assertSee('Acces anticipat')
+            ->assertSee('conturile și profilurile sunt disponibile.')
             ->assertSee('noindex, nofollow');
     }
 
     public function test_english_has_localized_navigation_and_content(): void
     {
-        $this->get('/en')->assertOk()->assertSee('A new beginning.')
-            ->assertSee('lang="en"', false)->assertSee('Choose language')
-            ->assertSee('In preparation')->assertSee('href="'.route('home.localized', ['locale' => 'ro']).'"', false);
+        $this->get('/en')->assertOk()->assertSee('Good things.')
+            ->assertSee('lang="en"', false)->assertSee('Site language')
+            ->assertSee('Early access')->assertSee('href="'.route('home.localized', ['locale' => 'ro']).'"', false);
     }
 
     public function test_romanian_explicit_route_and_invalid_language(): void
@@ -45,7 +45,7 @@ class ShellTest extends TestCase
 
     public function test_locale_does_not_leak_between_requests(): void
     {
-        $this->get('/en')->assertSee('A new beginning.');
-        $this->get('/ro')->assertSee('Un nou început.')->assertDontSee('A new beginning.');
+        $this->get('/en')->assertSee('Good things.');
+        $this->get('/ro')->assertSee('Lucruri bune.')->assertDontSee('Good things.');
     }
 }

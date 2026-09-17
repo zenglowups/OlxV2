@@ -2,17 +2,27 @@
 
 return [
     'required' => 'Câmpul :attribute este obligatoriu.',
+    'required_if' => 'Completează câmpul :attribute pentru opțiunea aleasă.',
     'string' => 'Câmpul :attribute trebuie să conțină text.',
     'email' => 'Introdu o adresă de email validă.',
-    'max' => ['string' => 'Câmpul :attribute poate avea cel mult :max caractere.'],
+    'max' => ['string' => 'Câmpul :attribute poate avea cel mult :max caractere.', 'file' => 'Fișierul poate avea cel mult :max KB.'],
     'min' => ['string' => 'Câmpul :attribute trebuie să aibă cel puțin :min caractere.'],
     'confirmed' => 'Confirmarea câmpului :attribute nu corespunde.',
     'unique' => 'Această valoare pentru :attribute este deja folosită.',
     'in' => 'Valoarea aleasă pentru :attribute nu este validă.',
+    'not_in' => 'Această valoare pentru :attribute este rezervată.',
+    'regex' => 'Formatul câmpului :attribute nu este valid.',
+    'file' => 'Alege un fișier valid pentru :attribute.',
+    'mimetypes' => 'Alege o imagine JPG, PNG sau WebP validă.',
+    'uploaded' => 'Fișierul nu a putut fi încărcat. Verifică dimensiunea și încearcă din nou.',
     'boolean' => 'Valoarea pentru :attribute nu este validă.',
     'current_password' => 'Parola nu este corectă.',
     'attributes' => [
         'name' => 'nume', 'email' => 'email', 'password' => 'parolă',
         'account_type' => 'tipul contului', 'token' => 'link de recuperare', 'remember' => 'ține-mă minte',
+        'username' => 'nume de utilizator', 'description' => 'descriere',
+        'location_label' => 'localitate', 'business_name' => 'numele firmei',
+        'tax_id' => 'CUI/CIF', 'phone' => 'telefon', 'avatar' => 'fotografie',
+        'contact_method' => 'metodă de contact',
     ],
 ];
