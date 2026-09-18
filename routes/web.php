@@ -7,8 +7,10 @@ use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Auth\SessionController;
 use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\ListingPhotoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\SetLocale;
+use App\Models\ListingPhoto;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(SetLocale::class)->group(function (): void {
@@ -48,5 +50,7 @@ Route::prefix('{locale}')->whereIn('locale', ['ro', 'en'])->middleware(SetLocale
 // Fixed callback URLs can be registered with the providers; original locale stays in the session.
 Route::get('/oauth/{provider}/callback', [OAuthController::class, 'callback'])
     ->whereIn('provider', ['google', 'facebook'])->middleware(['guest', 'throttle:oauth'])->name('oauth.callback');
+
+Route::get('/media/listings/{photo}/{variant}', [ListingPhotoController::class, 'image'])->whereUuid('photo')->whereIn('variant', array_keys(ListingPhoto::VARIANTS))->name('listing-image');
 
 Route::get('/media/avatars/{avatar}', AvatarController::class)->whereUuid('avatar')->name('avatar');

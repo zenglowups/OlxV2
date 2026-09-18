@@ -1,10 +1,15 @@
 <?php
 
 use App\Http\Controllers\DraftController;
+use App\Http\Controllers\ListingPhotoController;
 use App\Services\Listings\DraftValidator;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'verified'])->group(function (): void {
+    Route::post('/account/drafts/{listing}/photos', [ListingPhotoController::class, 'store'])->whereUuid('listing')->middleware('throttle:photo-upload')->name('photos.store');
+    Route::get('/account/drafts/{listing}/photos/status', [ListingPhotoController::class, 'status'])->whereUuid('listing')->middleware('throttle:photo-status')->name('photos.status');
+    Route::put('/account/drafts/{listing}/photos/{photo}', [ListingPhotoController::class, 'update'])->whereUuid(['listing', 'photo'])->middleware('throttle:draft-save')->name('photos.update');
+    Route::delete('/account/drafts/{listing}/photos/{photo}', [ListingPhotoController::class, 'destroy'])->whereUuid(['listing', 'photo'])->middleware('throttle:draft-save')->name('photos.destroy');
     Route::get('/sell', [DraftController::class, 'create'])->name('drafts.create');
     Route::get('/account/drafts', [DraftController::class, 'index'])->name('drafts.index');
     Route::post('/account/drafts', [DraftController::class, 'store'])->middleware('throttle:draft-create')->name('drafts.store');

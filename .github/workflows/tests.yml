@@ -33,6 +33,7 @@ jobs:
           docker compose exec -T app php artisan db:seed --class=LocationSeeder --force
           docker compose exec -T app php scripts/listing-browser-fixture.php create
           docker compose run --rm --no-deps -e PLAYWRIGHT_BASE_URL=http://web browser
+          docker compose exec -T app php scripts/listing-browser-fixture.php audit-photos
       - name: Clean scoped browser fixtures
         if: always()
         run: |

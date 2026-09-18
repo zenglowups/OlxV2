@@ -19,6 +19,8 @@ test('real resumable draft, autosave, full wizard, protected preview and conflic
     await page.locator('.sell-category').filter({hasText:'Electronice'}).click();
     await page.locator('.sell-category').filter({hasText:'Calculatoare'}).click();
     await page.getByRole('button',{name:'Folosește această categorie'}).click();
+    await expect(page).toHaveURL(/edit\/photos$/);
+    await page.getByRole('button',{name:'Salvează și continuă'}).click();
     await expect(page).toHaveURL(/edit\/details$/);
     const detailsURL=page.url();
     const root=detailsURL.replace('/edit/details','');

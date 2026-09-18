@@ -49,8 +49,8 @@ class CategorySeeder extends Seeder
     {
         $category = Category::where('slug', $slug)->sole();
         CategoryAttribute::firstOrCreate(['category_id' => $category->id, 'key' => $key], [
-            'label_ro' => $ro, 'label_en' => $en, 'type' => $type, 'is_required' => $required, 'is_filterable' => in_array($type,['number', 'select', 'boolean']),
-            'minimum' => $min, 'maximum' => $max, 'unit' => $unit, 'options' => $options ? array_map(fn ($o) => ['value' => $o[0], 'label_ro' => $o[1], 'label_en' => $o[2]],$options) : null,
+            'label_ro' => $ro, 'label_en' => $en, 'type' => $type, 'is_required' => $required, 'is_filterable' => in_array($type, ['number', 'select', 'boolean']),
+            'minimum' => $min, 'maximum' => $max, 'unit' => $unit, 'options' => $options ? array_map(fn ($o) => ['value' => $o[0], 'label_ro' => $o[1], 'label_en' => $o[2]], $options) : null,
         ]);
     }
 }

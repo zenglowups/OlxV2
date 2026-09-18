@@ -29,6 +29,7 @@ return [
     'locality' => 'Town or locality',
     'contact_method' => 'Contact method',
     'step_category' => 'Category',
+    'step_photos' => 'Photos',
     'step_details' => 'Description',
     'step_attributes' => 'Details',
     'step_price' => 'Price',

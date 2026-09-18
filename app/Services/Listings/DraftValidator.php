@@ -13,7 +13,7 @@ use Illuminate\Validation\ValidationException;
 
 class DraftValidator
 {
-    public const STEPS = ['category', 'details', 'attributes', 'price', 'location', 'contact', 'preview'];
+    public const STEPS = ['category', 'photos', 'details', 'attributes', 'price', 'location', 'contact', 'preview'];
 
     public const PRICING = ['fixed', 'negotiable', 'free', 'exchange', 'contact'];
 
@@ -38,6 +38,7 @@ class DraftValidator
         }
         $rules = match ($step) {
             'category' => ['category_id' => ['required', 'integer']],
+            'photos' => [],
             'details' => ['title' => [$required, 'string', 'max:140', ...($complete ? ['min:8'] : [])], 'description' => [$required, 'string', 'max:5000', ...($complete ? ['min:30'] : [])]],
             'attributes' => ['attributes' => ['sometimes', 'array', 'max:100']],
             'price' => [
@@ -56,6 +57,10 @@ class DraftValidator
         $data = Validator::make($input, $rules, [], $labels)->validate();
         if ($step === 'category') {
             $data['category_id'] = $this->category((int) $data['category_id'])->id;
+        } elseif ($step === 'photos') {
+            if ($complete && $listing->photos()->where('status', '!=', 'ready')->exists()) {
+                throw ValidationException::withMessages(['photos' => __('photo.not_ready')]);
+            }
         } elseif ($step === 'details') {
             $data = ['title' => $data['title'] ?? '', 'description' => $data['description'] ?? ''];
         } elseif ($step === 'attributes') {

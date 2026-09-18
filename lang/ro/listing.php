@@ -29,6 +29,7 @@ return [
     'locality' => 'Localitate',
     'contact_method' => 'Metodă de contact',
     'step_category' => 'Categorie',
+    'step_photos' => 'Fotografii',
     'step_details' => 'Descriere',
     'step_attributes' => 'Detalii',
     'step_price' => 'Preț',

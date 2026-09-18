@@ -12,7 +12,7 @@ return [
     'exists' => 'Opțiunea aleasă pentru :attribute nu există.',
     'email' => 'Introdu o adresă de email validă.',
     'max' => ['array' => 'Câmpul :attribute poate conține cel mult :max elemente.', 'numeric' => 'Câmpul :attribute poate avea cel mult valoarea :max.', 'string' => 'Câmpul :attribute poate avea cel mult :max caractere.', 'file' => 'Fișierul poate avea cel mult :max KB.'],
-    'min' => ['numeric' => 'Câmpul :attribute trebuie să fie cel puțin :min.', 'string' => 'Câmpul :attribute trebuie să aibă cel puțin :min caractere.'],
+    'min' => ['array' => 'Alege cel puțin :min elemente pentru :attribute.', 'numeric' => 'Câmpul :attribute trebuie să fie cel puțin :min.', 'string' => 'Câmpul :attribute trebuie să aibă cel puțin :min caractere.'],
     'confirmed' => 'Confirmarea câmpului :attribute nu corespunde.',
     'unique' => 'Această valoare pentru :attribute este deja folosită.',
     'in' => 'Valoarea aleasă pentru :attribute nu este validă.',

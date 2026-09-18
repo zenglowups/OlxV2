@@ -100,3 +100,10 @@ The full suite also needs the two isolated seller accounts from
 scripts/listing-browser-fixture.php create. Run its clean action after QA.
 See docs/listing-drafts.md for setup, coverage, privacy and conflict guarantees.
 The reference LocationSeeder must be run once on a fresh migrated environment.
+
+## M6 private listing photos
+ListingPhotoTest covers actual GD conversion, orientation, size/count limits, ownership,
+version conflicts, processing failures, retries and durable cleanup. The browser suite adds real
+MinIO/Redis uploads, primary/reorder/delete, responsive gallery and draft cards. Run the fixture
+audit-photos action after browser checks to verify private S3 ACLs, anonymous 403 and source removal.
+See docs/listing-photos.md for the full flow and scoped cleanup commands.

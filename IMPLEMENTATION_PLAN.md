@@ -6,7 +6,7 @@ Complete and validate one milestone before starting the next; do not rebuild fin
 
 ## Execution state
 
-**M1 complete in commit 03eb66b. M2 complete in commit 89e0e2c. M3 complete in commit 327bcbb. M4 complete in commit c068fc4. M5 drafts complete (current checkpoint).**
+**M1 complete in commit 03eb66b. M2 complete in commit 89e0e2c. M3 complete in commit 327bcbb. M4 complete in commit c068fc4. M5 complete in commit 20bb3f9. M6 photos complete at this checkpoint. Next: M7.**
 
 ### M1 completed
 - Laravel 13 / PHP 8.4 modular monolith; official scaffold and locked dependencies.
@@ -41,11 +41,11 @@ Complete and validate one milestone before starting the next; do not rebuild fin
 - Startup clears compiled code only; it does not flush Redis data, sessions or rate limits.
 
 ### Exact next task
-Implement M6: secure listing photos, maximum eight, actual format/dimension/size validation,
-private S3 storage, queued 320/640/1280 WebP variants, orientation/metadata handling,
-owner-authorized reorder/remove/primary selection, failed-upload recovery and durable cleanup.
-Insert photos after category in the wizard; show real images in private preview and draft cards.
-Validate and commit M6 before M7 publishing/lifecycle. No fake publish button or synthetic inventory.
+Implement M7: validated publication, real public listing pages, owner management/editing,
+active/reserved/sold/expired/suspended/removed states, 30-day expiry and renewal.
+Integrate eligible public images, category/profile listing cards and real paginated owner views.
+Keep drafts private, contact values protected until M9, and moderation state unreviewed on publication.
+Validate and commit M7 before M8 search. No synthetic inventory or fabricated statistics.
 Continue the navy/teal responsive interface and integrate profile listings/reviews in M7/M11.
 Owner requested faster visible progress and continued again on 2026-09-18.
 
@@ -128,6 +128,22 @@ Owner requested faster visible progress and continued again on 2026-09-18.
   recorded QA users, categories, drafts and avatars were cleaned. No real user data removed.
 - See docs/listing-drafts.md. Photos M6, public publication/lifecycle M7, protected reveal M9.
 
+### M6 completed and validated — 2026-09-18
+- Eight-photo wizard step, actual JPEG/PNG/WebP validation, limits, UUID private S3 storage.
+- Redis processing generates 320/640/1280 WebP, normalizes EXIF, strips metadata and retires originals.
+- Owner-only versioned upload/reorder/primary/delete, resumable recovery and durable file retirement.
+- Real responsive preview gallery and draft card photos, mobile controls at least 44px.
+- Additive photo migration applied; full Windows START passed with all services healthy.
+- PHPUnit: **82 passed, 2,244 assertions**, 27.09 seconds. Dedicated photo tests: 12 / 139 assertions.
+- Playwright: **24 passed**, 55.1 seconds. Final focused photo/gallery run: 2 passed, 18.1 seconds.
+- Actual MinIO audit: 15 private WebP objects, anonymous HTTP 403 and removed original sources.
+- Desktop/mobile screenshots, axe, 320–1440px overflow, real ninth-file rejection and guest denial passed.
+- Pint: 114 files; Composer strict validation and frontend lint/build passed.
+- CSS 46.60 kB / 10.15 kB gzip; JS 4.21 kB / 1.74 kB gzip.
+- Live infrastructure smoke passed (probe 7377543b-41f9-4dc0-98ad-acbcc588d715).
+- Windows app browser confirmed Aproape at localhost:8088; only scoped QA accounts/images cleaned.
+- See docs/listing-photos.md. Public image eligibility remains M7; production storage remains external.
+
 ## Milestones
 
 | # | Milestone | State |
@@ -137,7 +153,7 @@ Owner requested faster visible progress and continued again on 2026-09-18.
 | 3 | Individual/business/public profiles and privacy | Complete |
 | 4 | Hierarchical categories and dynamic attributes/admin | Complete |
 | 5 | Posting wizard, private drafts, preview | Complete |
-| 6 | Secure image pipeline and S3 variants | Pending |
+| 6 | Secure image pipeline and S3 variants | Complete |
 | 7 | Publishing, lifecycle, editing, expiration, renewals | Pending |
 | 8 | Search abstraction, filters, indexes, pagination | Pending |
 | 9 | Protected contact reveal and anti-abuse | Pending |

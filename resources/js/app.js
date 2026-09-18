@@ -1,4 +1,5 @@
 import './drafts.js';
+import './photos.js';
 
 // Native <details> works without JavaScript. Enhance it for keyboard and link dismissal.
 document.querySelectorAll('.mobile-menu').forEach((menu) => {

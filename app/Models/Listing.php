@@ -6,12 +6,13 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[Fillable(['category_id', 'title', 'description', 'attributes', 'pricing_mode', 'price_minor', 'currency', 'country_code', 'county_id', 'locality', 'contact_method'])]
 #[Hidden(['creation_token'])]
 class Listing extends Model
 {
-    protected $attributes = ['title' => '', 'description' => '', 'attributes' => '{}', 'pricing_mode' => 'fixed', 'currency' => 'RON', 'country_code' => 'RO', 'status' => 'draft', 'moderation_state' => 'unreviewed', 'version' => 1, 'last_step' => 'details'];
+    protected $attributes = ['title' => '', 'description' => '', 'attributes' => '{}', 'pricing_mode' => 'fixed', 'currency' => 'RON', 'country_code' => 'RO', 'status' => 'draft', 'moderation_state' => 'unreviewed', 'version' => 1, 'last_step' => 'photos'];
 
     protected function casts(): array
     {
@@ -21,6 +22,11 @@ class Listing extends Model
     public function getRouteKeyName(): string
     {
         return 'public_id';
+    }
+
+    public function photos(): HasMany
+    {
+        return $this->hasMany(ListingPhoto::class)->orderBy('position')->orderBy('id');
     }
 
     public function category(): BelongsTo

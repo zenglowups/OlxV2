@@ -51,7 +51,7 @@ class DraftTest extends TestCase
         $payload = ['category_id' => Category::where('slug', 'calculatoare')->value('id'), 'creation_token' => (string) Str::uuid(), 'user_id' => 500, 'status' => 'active', 'moderation_state' => 'approved'];
         $this->post('/ro/account/drafts', $payload)->assertRedirect();
         $listing = Listing::sole();
-        $this->post('/ro/account/drafts', $payload)->assertRedirect('/ro/account/drafts/'.$listing->public_id.'/edit/details');
+        $this->post('/ro/account/drafts', $payload)->assertRedirect('/ro/account/drafts/'.$listing->public_id.'/edit/photos');
         $this->assertDatabaseCount('listings', 1);
         $this->assertSame($user->id, $listing->user_id);
         $this->assertSame('draft', $listing->status);

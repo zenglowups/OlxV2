@@ -20,7 +20,7 @@ class DraftController extends Controller
         Gate::authorize('create', Listing::class);
         $drafts = Listing::where('user_id', $request->user()->id)->where('status', 'draft')
             ->select(['id', 'public_id', 'category_id', 'title', 'pricing_mode', 'price_minor', 'currency', 'last_step', 'updated_at'])
-            ->with('category:id,name_ro,name_en,icon')->orderByDesc('updated_at')->orderByDesc('id')->paginate(12);
+            ->with(['category:id,name_ro,name_en,icon', 'photos' => fn ($query) => $query->select(['id', 'public_id', 'listing_id', 'position', 'status', 'variants'])->where('status', 'ready')->limit(1)])->orderByDesc('updated_at')->orderByDesc('id')->paginate(12);
 
         return view('listings.drafts', compact('drafts'));
     }
@@ -65,6 +65,10 @@ class DraftController extends Controller
             return redirect()->route('drafts.preview', $listing);
         }
 
+        if ($step === 'photos') {
+            return view('listings.photos', ['listing' => $listing, 'step' => 'photos', 'steps' => DraftValidator::STEPS, 'photos' => $listing->photos()->get()]);
+        }
+
         return view('listings.wizard', [
             'listing' => $listing, 'step' => $step, 'steps' => DraftValidator::STEPS,
             'definitions' => $step === 'attributes' ? $catalog->attributes($listing->category) : collect(),
@@ -101,6 +105,6 @@ class DraftController extends Controller
         Gate::authorize('updateDraft', $listing);
         $listing->load('category', 'county');
 
-        return view('listings.preview', ['listing' => $listing, 'steps' => DraftValidator::STEPS, 'step' => 'preview', 'issues' => $validator->issues($listing), 'definitions' => $catalog->attributes($listing->category)]);
+        return view('listings.preview', ['listing' => $listing, 'steps' => DraftValidator::STEPS, 'step' => 'preview', 'issues' => $validator->issues($listing), 'photos' => $listing->photos()->where('status', 'ready')->get(), 'definitions' => $catalog->attributes($listing->category)]);
     }
 }
