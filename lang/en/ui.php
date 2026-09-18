@@ -32,7 +32,7 @@ return [
     'near_title' => 'You choose what is visible.',
     'near_text' => 'Control your profile visibility. Your phone number and email address stay off the public page.',
     'notice_title' => 'Building Aproape, step by step.',
-    'notice_text' => 'Early access: accounts and profiles are available. Listings and search are coming next.',
+    'notice_text' => 'Early access: accounts, profiles and listing drafts are available. Publishing and search are coming next.',
     'strip_one' => 'Protected contact details',
     'strip_one_detail' => 'You control your public profile',
     'strip_two' => 'People and businesses',

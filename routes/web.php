@@ -18,6 +18,7 @@ Route::middleware(SetLocale::class)->group(function (): void {
 
 Route::prefix('{locale}')->whereIn('locale', ['ro', 'en'])->middleware(SetLocale::class)->group(function (): void {
     require __DIR__.'/catalog.php';
+    require __DIR__.'/listings.php';
     Route::get('/sellers/{profile:username}', [ProfileController::class, 'show'])->name('profile.show');
     Route::middleware(['auth', 'verified'])->group(function (): void {
         Route::get('/account/profile', [ProfileController::class, 'edit'])->name('profile.edit');

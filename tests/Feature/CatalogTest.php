@@ -58,7 +58,7 @@ class CatalogTest extends TestCase
         $this->get('/ro/categories/'.$leaf->slug)->assertOk();
         $root->update(['is_active' => false]);
         $this->get('/ro/categories/'.$leaf->slug)->assertNotFound();
-        $this->get('/ro/categories')->assertDontSee($root->name_ro);
+        $this->get('/ro/categories')->assertOk()->assertDontSee($root->name_ro);
     }
 
     public function test_admin_routes_require_verified_administrator_and_password_for_writes(): void
@@ -165,7 +165,7 @@ class CatalogTest extends TestCase
             $this->category('page-'.$i);
         }
         $response = $this->get('/en/categories')->assertOk();
-        $this->assertCount(24,$response->viewData('categories')->items());
+        $this->assertCount(24, $response->viewData('categories')->items());
         $this->get('/en/categories?page=2')->assertOk()->assertSee('page-26')->assertDontSee('page-0');
     }
 }

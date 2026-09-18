@@ -1,12 +1,12 @@
 # Implementation plan
 
-Last updated: 2026-09-17. Repository: zenglowups/OlxV2, branch main.
+Last updated: 2026-09-18. Repository: zenglowups/OlxV2, branch main.
 The owner explicitly requested continued implementation of the full document on 2026-09-15.
 Complete and validate one milestone before starting the next; do not rebuild finished work.
 
 ## Execution state
 
-**M1 complete in commit 03eb66b. M2 complete in commit 89e0e2c. M3 complete in commit 327bcbb. M4 catalogue complete (current checkpoint).**
+**M1 complete in commit 03eb66b. M2 complete in commit 89e0e2c. M3 complete in commit 327bcbb. M4 complete in commit c068fc4. M5 drafts complete (current checkpoint).**
 
 ### M1 completed
 - Laravel 13 / PHP 8.4 modular monolith; official scaffold and locked dependencies.
@@ -41,12 +41,13 @@ Complete and validate one milestone before starting the next; do not rebuild fin
 - Startup clears compiled code only; it does not flush Redis data, sessions or rate limits.
 
 ### Exact next task
-Implement M5: private seller-owned drafts and a server-validated, resumable posting wizard.
-Reuse CategoryCatalog and AttributeValidator; support pricing modes, Romanian county/locality,
-contact preference and private preview. Persist partial progress with conflict-safe autosave.
-Add the photo step through M6, then actual publish/lifecycle in M7; do not advertise fake publishing.
-Continue the finished navy/teal responsive interface. Integrate profile listings/reviews in M7/M11.
-Owner requested faster visible progress on 2026-09-17 and said Continue again after catalogue work.
+Implement M6: secure listing photos, maximum eight, actual format/dimension/size validation,
+private S3 storage, queued 320/640/1280 WebP variants, orientation/metadata handling,
+owner-authorized reorder/remove/primary selection, failed-upload recovery and durable cleanup.
+Insert photos after category in the wizard; show real images in private preview and draft cards.
+Validate and commit M6 before M7 publishing/lifecycle. No fake publish button or synthetic inventory.
+Continue the navy/teal responsive interface and integrate profile listings/reviews in M7/M11.
+Owner requested faster visible progress and continued again on 2026-09-18.
 
 ### M2 completed and validated — 2026-09-16
 - Real RO/EN registration/login/logout, individual/business types, password/session security.
@@ -104,6 +105,29 @@ Owner requested faster visible progress on 2026-09-17 and said Continue again af
 - Admin 2FA/full admin modules remain M14; no default production admin or external exposure.
 - See docs/catalog.md for data model, commands and QA setup.
 
+### M5 completed and validated — 2026-09-18
+- Seven-step server-rendered wizard, owner-only draft dashboard and private preview in RO/EN.
+- Real PostgreSQL persistence, incomplete saves, 900ms autosave, normal non-JS forms and resume links.
+- Locked version checks reject stale-tab writes with recoverable HTTP 409; visible offline retry.
+- Live inherited attribute validation, exact integer money, five pricing modes, RON/EUR.
+- Romania reference country/42 counties and validated locality; no precise address requested.
+- Protected contact preference only; actual phone/email never appears in the preview.
+- Idempotent draft creation, per-user limits, ownership/state checks and no mass-assigned lifecycle.
+- Added responsive category picker, editor, price options, checklist and draft cards to navigation.
+- Additive migration applied; explicit idempotent LocationSeeder, no development resets.
+- Full PHPUnit: **70 passed, 1,950 assertions**, 21.44 seconds (2026-09-17).
+- Full Playwright: **22 passed**, 56.9 seconds, including the complete wizard on desktop/mobile.
+- Dedicated draft browser run: 2 passed, 27.7 seconds. Axe and 320–1440px wizard overflow passed.
+- Tested reload/resume, two-tab conflict, offline/retry, language switching, no-JS submission and guest denial.
+- Screenshots inspected; fixed native form submission, price-field alignment and hidden skip-link capture.
+- Pint: 104 files. Frontend lint/build passed; CSS 42.06 kB / 9.29 gzip, JS 3.28 / 1.47 gzip.
+- Infrastructure smoke passed (probe b6943a1c-d041-4e8c-a1d3-b5178e982f58).
+- Full Windows START succeeded on 2026-09-18; readiness OK, all services healthy.
+- Resume verification: 13 draft tests / 170 assertions passed again (6.07 seconds).
+- Prior approval-service usage limit interrupted only QA cleanup/commit. On resume, only the
+  recorded QA users, categories, drafts and avatars were cleaned. No real user data removed.
+- See docs/listing-drafts.md. Photos M6, public publication/lifecycle M7, protected reveal M9.
+
 ## Milestones
 
 | # | Milestone | State |
@@ -112,7 +136,7 @@ Owner requested faster visible progress on 2026-09-17 and said Continue again af
 | 2 | Authentication and OAuth boundaries | Complete |
 | 3 | Individual/business/public profiles and privacy | Complete |
 | 4 | Hierarchical categories and dynamic attributes/admin | Complete |
-| 5 | Posting wizard, private drafts, preview | Pending |
+| 5 | Posting wizard, private drafts, preview | Complete |
 | 6 | Secure image pipeline and S3 variants | Pending |
 | 7 | Publishing, lifecycle, editing, expiration, renewals | Pending |
 | 8 | Search abstraction, filters, indexes, pagination | Pending |

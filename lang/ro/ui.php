@@ -32,7 +32,7 @@ return [
     'near_title' => 'Tu alegi ce se vede.',
     'near_text' => 'Controlezi vizibilitatea profilului. Telefonul și adresa de email rămân în afara paginii publice.',
     'notice_title' => 'Construim Aproape, pas cu pas.',
-    'notice_text' => 'Acces anticipat: conturile și profilurile sunt disponibile. Anunțurile și căutarea urmează.',
+    'notice_text' => 'Acces anticipat: poți crea un cont, un profil și ciorne de anunțuri. Publicarea și căutarea urmează.',
     'strip_one' => 'Date de contact protejate',
     'strip_one_detail' => 'Tu controlezi profilul public',
     'strip_two' => 'Persoane și afaceri',

@@ -21,7 +21,7 @@ return [
     'breadcrumb' => 'Category navigation',
     'children' => 'Choose a subcategory',
     'leaf_title' => 'You found the right category.',
-    'leaf_text' => 'Listing publication is coming to this category. You can complete your seller profile in the meantime.',
+    'leaf_text' => 'Prepare your first listing in this category. Save a draft and return whenever you like.',
     'admin' => 'Category administration',
     'new' => 'Add a category',
     'edit' => 'Edit category',

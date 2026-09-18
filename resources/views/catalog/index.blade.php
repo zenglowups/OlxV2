@@ -8,8 +8,10 @@
 <h2 class="catalog-subtitle">{{ $category ? __('catalog.children') : __('catalog.all') }}</h2>
 <div class="category-grid">@foreach($categories as $item)<x-category-card :category="$item"/>@endforeach</div>
 {{ $categories->links('components.pagination') }}
+@elseif($category)
+<div class="catalog-empty"><x-icon name="heart"/><h2>{{ __('catalog.leaf_title') }}</h2><p>{{ __('catalog.leaf_text') }}</p><a class="button button-primary" href="{{ route('drafts.create', ['category' => $category->slug]) }}">{{ __('listing.start') }}</a></div>
 @else
-<div class="catalog-empty"><x-icon name="heart"/><h2>{{ __('catalog.leaf_title') }}</h2><p>{{ __('catalog.leaf_text') }}</p><a class="button button-primary" href="{{ auth()->check() ? route('profile.edit') : route('register') }}">{{ auth()->check() ? __('profile.edit') : __('ui.start') }}</a></div>
+<p class="catalog-empty">{{ __('listing.no_categories') }}</p>
 @endif
 </section>
 @endsection

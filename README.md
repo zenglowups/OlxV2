@@ -1,8 +1,8 @@
 # OLXv2 · Aproape
 
 A Romanian classifieds marketplace, built as a portable Laravel monolith.
-**Completed: M1 foundation, M2 authentication, M3 profiles and responsive visual interface, M4 categories and administration. Next: M5 posting wizard.**
-Registration, login, email verification, password recovery, session revocation and individual/business profiles with private S3 avatars work locally. Live category navigation and secure category/attribute administration also work. Listings, search and contact reveal are still pending. See docs/authentication.md for setup and security decisions.
+**Completed: M1 foundation, M2 authentication, M3 profiles and responsive visual interface, M4 categories and administration, M5 private drafts. Next: M6 listing photos.**
+Registration, login, email verification, password recovery, session revocation and individual/business profiles with private S3 avatars work locally. Live category navigation, secure category/attribute administration and the resumable posting wizard work. Private drafts, autosave and preview are available; publication, search and contact reveal are still pending. See docs/authentication.md for setup and security decisions.
 The provisional public name **Aproape** is configured with `APP_NAME`; OLXv2 is an internal codename.
 
 ## Open the application
@@ -11,6 +11,8 @@ The provisional public name **Aproape** is configured with `APP_NAME`; OLXv2 is 
 - English: **http://localhost:8088/en**
 - Create an account: **http://localhost:8088/ro/register**
 - Sign in: **http://localhost:8088/ro/login**
+- Prepare a listing: **http://localhost:8088/ro/sell**
+- Your drafts: **http://localhost:8088/ro/account/drafts**
 - Mailpit (local email inbox): **http://localhost:8025**
 - MinIO console: **http://localhost:9001**
 - Liveness: **http://localhost:8088/up**
@@ -137,6 +139,7 @@ START removes a stale hot-file and defaults to built assets. Don't run multiple 
 - [Permanent engineering constraints](AGENTS.md)
 - [Original product requirements](docs/product-requirements.md)
 - [Architecture and decisions](docs/architecture.md)
+- [Private drafts, autosave and listing wizard](docs/listing-drafts.md)
 - [Tests and verification](docs/testing.md)
 - [Deployment and backup preparation](docs/deployment.md)
 - [Design references](docs/design-references/README.md)

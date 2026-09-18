@@ -8,8 +8,8 @@
     "scripts": {
         "build": "vite build",
         "dev": "vite --host 0.0.0.0",
-        "lint": "prettier --check resources/css/*.css resources/js/app.js vite.config.js package.json compose.yaml",
-        "format": "prettier --write resources/css/*.css resources/js/app.js vite.config.js package.json compose.yaml",
+        "lint": "prettier --check resources/css/*.css resources/js/*.js vite.config.js package.json compose.yaml",
+        "format": "prettier --write resources/css/*.css resources/js/*.js vite.config.js package.json compose.yaml",
         "test:browser": "playwright test"
     },
     "devDependencies": {

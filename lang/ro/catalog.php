@@ -21,7 +21,7 @@ return [
     'breadcrumb' => 'Locația în categorii',
     'children' => 'Alege o subcategorie',
     'leaf_title' => 'Ai ajuns în categoria potrivită.',
-    'leaf_text' => 'Pregătim publicarea anunțurilor în această categorie. Între timp, îți poți completa profilul.',
+    'leaf_text' => 'Pregătește primul tău anunț în această categorie. Poți salva o ciornă și reveni oricând.',
     'admin' => 'Administrare categorii',
     'new' => 'Adaugă o categorie',
     'edit' => 'Editează categoria',

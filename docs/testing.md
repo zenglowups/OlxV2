@@ -94,3 +94,9 @@ The homepage and all profile/account screens receive axe and responsive screensh
 The complete browser suite now needs explicit local admin QA fixtures and the initial taxonomy.
 See docs/catalog.md for create/test/clean commands. These never run during ordinary startup.
 The CI workflow performs the same setup and cleans only its UUID-labelled fixture data.
+
+## M5 draft browser preparation
+The full suite also needs the two isolated seller accounts from
+scripts/listing-browser-fixture.php create. Run its clean action after QA.
+See docs/listing-drafts.md for setup, coverage, privacy and conflict guarantees.
+The reference LocationSeeder must be run once on a fresh migrated environment.

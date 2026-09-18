@@ -1,3 +1,5 @@
+import './drafts.js';
+
 // Native <details> works without JavaScript. Enhance it for keyboard and link dismissal.
 document.querySelectorAll('.mobile-menu').forEach((menu) => {
     menu.addEventListener('keydown', (event) => {

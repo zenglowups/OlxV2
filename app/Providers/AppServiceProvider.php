@@ -26,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
         RateLimiter::for('verification', fn (Request $request) => Limit::perMinute(6)->by($request->user()?->id ?? $request->ip()));
         RateLimiter::for('oauth', fn (Request $request) => Limit::perMinute(10)->by($request->ip()));
         RateLimiter::for('admin-write', fn (Request $request) => Limit::perMinute(10)->by($request->user()?->id ?? $request->ip()));
+        RateLimiter::for('draft-create', fn (Request $request) => Limit::perMinute(10)->by($request->user()?->id ?? $request->ip()));
+        RateLimiter::for('draft-save', fn (Request $request) => Limit::perMinute(90)->by($request->user()?->id ?? $request->ip()));
         RateLimiter::for('profile', fn (Request $request) => Limit::perMinute(10)->by($request->user()?->id ?? $request->ip()));
         RateLimiter::for('security', fn (Request $request) => Limit::perMinute(5)->by($request->user()?->id ?? $request->ip()));
     }

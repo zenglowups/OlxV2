@@ -10,7 +10,7 @@ class ShellTest extends TestCase
     {
         $this->get('/')->assertOk()->assertSee('Lucruri bune.')
             ->assertSee('lang="ro"', false)->assertSee('Acces anticipat')
-            ->assertSee('conturile și profilurile sunt disponibile.')
+            ->assertSee('ciorne de anunțuri')
             ->assertSee('noindex, nofollow');
     }
 

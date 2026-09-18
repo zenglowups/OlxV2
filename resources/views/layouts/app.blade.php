@@ -3,6 +3,7 @@
                 if (!$languageRoute || !in_array('locale', request()->route()?->parameterNames() ?? [], true)) $languageRoute = 'home.localized';
                 $languageParameters = array_intersect_key(request()->route()?->parameters() ?? [], array_flip(request()->route()?->parameterNames() ?? []));
                 if ($languageRoute === 'categories.show' && isset($languageParameters['category'])) $languageParameters['category'] = $languageParameters['category']->slug;
+                if ($languageRoute === 'drafts.create') $languageParameters = array_merge($languageParameters, request()->only('category', 'draft'));
                 if ($languageRoute === 'password.reset') $languageParameters = array_merge($languageParameters, request()->only('token', 'email'));
             @endphp
 <!DOCTYPE html>
@@ -36,7 +37,7 @@
                 <a href="{{ route($languageRoute, array_merge($languageParameters, ['locale' => 'ro'])) }}" lang="ro" hreflang="ro" @if(app()->getLocale() === 'ro') aria-current="page" @endif>RO</a>
                 <a href="{{ route($languageRoute, array_merge($languageParameters, ['locale' => 'en'])) }}" lang="en" hreflang="en" @if(app()->getLocale() === 'en') aria-current="page" @endif>EN</a>
             </nav>
-            <a class="button button-primary header-action" href="{{ auth()->check() ? route('profile.edit', ['locale' => app()->getLocale()]) : route('register', ['locale' => app()->getLocale()]) }}">{{ auth()->check() ? __('profile.profile_link') : __('ui.start') }} <span aria-hidden="true">+</span></a>
+            <a class="button button-primary header-action" href="{{ route('drafts.create', ['locale' => app()->getLocale()]) }}">{{ __('listing.start') }} <span aria-hidden="true">+</span></a>
             <details class="mobile-menu">
                 <summary aria-label="{{ __('ui.menu') }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></summary>
                 <nav aria-label="{{ __('ui.navigation') }}">
@@ -57,7 +58,7 @@
     </footer>
 <nav class="mobile-bottom" aria-label="{{ __('ui.navigation') }}">
     <a href="{{ route('home.localized', ['locale' => app()->getLocale()]) }}" @if(request()->routeIs('home', 'home.localized')) aria-current="page" @endif><x-icon name="home"/>{{ __('ui.home') }}</a>
-    <a class="nav-profile" href="{{ auth()->check() ? route('profile.edit', ['locale' => app()->getLocale()]) : route('register', ['locale' => app()->getLocale()]) }}" @if(request()->routeIs('profile.*', 'register')) aria-current="page" @endif><x-icon name="edit"/>{{ __('profile.profile_link') }}</a>
+    <a class="nav-profile" href="{{ route('drafts.create', ['locale' => app()->getLocale()]) }}" @if(request()->routeIs('drafts.*')) aria-current="page" @endif><x-icon name="edit"/>{{ __('listing.short_start') }}</a>
     <a href="{{ auth()->check() ? route('account', ['locale' => app()->getLocale()]) : route('login', ['locale' => app()->getLocale()]) }}" @if(request()->routeIs('account', 'login')) aria-current="page" @endif><x-icon name="user"/>{{ __('auth.account') }}</a>
 </nav>
 </body>

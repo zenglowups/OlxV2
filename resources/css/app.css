@@ -1,4 +1,5 @@
 @import './marketplace.css';
+@import './listings.css';
 @import './catalog.css';
 @layer base, components, responsive;
 
@@ -81,6 +82,7 @@
         position: fixed;
         left: 16px;
         top: -100px;
+        clip-path: inset(50%);
         z-index: 20;
         padding: 14px 20px;
         background: var(--teal);
@@ -88,6 +90,7 @@
         border-radius: 8px;
     }
     .skip-link:focus {
+        clip-path: none;
         top: 12px;
     }
     .site-header {
