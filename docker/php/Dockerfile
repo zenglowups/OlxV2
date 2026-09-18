@@ -1,5 +1,5 @@
 FROM composer:2.9 AS composer
-FROM php:8.4-fpm-bookworm
+FROM php:8.5-fpm-bookworm
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl git unzip libpq-dev libicu-dev libzip-dev libpng-dev libjpeg62-turbo-dev libwebp-dev \
