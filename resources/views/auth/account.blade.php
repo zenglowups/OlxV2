@@ -9,7 +9,7 @@
         <article><span class="summary-icon gold"><x-icon name="user"/></span><div><strong>{{ __('auth.'.auth()->user()->account_type) }}</strong><p>{{ __('auth.account_type') }}</p></div></article>
     </div>
     @if(auth()->user()->is_admin)<a class="button secondary" href="{{ route('admin.categories.index') }}">{{ __('catalog.admin') }}</a>@endif
-@unless(auth()->user()->is_admin)<a class="account-draft-link" href="{{ route('drafts.index') }}"><x-icon name="edit"/><span>{{ __('listing.drafts') }}</span><small>{{ __('listing.private_note') }}</small><span aria-hidden="true">→</span></a>@endunless
+@unless(auth()->user()->is_admin)<a class="account-draft-link" href="{{ route('listings.manage') }}"><x-icon name="grid"/><span>{{ __('market.mine') }}</span><small>{{ __('market.manage_intro') }}</small><span aria-hidden="true">→</span></a><a class="account-draft-link" href="{{ route('drafts.index') }}"><x-icon name="edit"/><span>{{ __('listing.drafts') }}</span><small>{{ __('listing.private_note') }}</small><span aria-hidden="true">→</span></a>@endunless
 <div class="account-columns">
         <aside class="account-panel"><span class="principle-icon"><x-icon name="user"/></span><h2>{{ __('profile.profile_link') }}</h2><p>{{ __('profile.intro') }}</p><a class="button secondary" href="{{ route('profile.edit') }}">{{ __('profile.edit') }} <span aria-hidden="true">→</span></a><dl class="account-details"><dt>{{ __('auth.email') }}</dt><dd>{{ auth()->user()->email }}</dd></dl><form method="POST" action="{{ route('logout') }}">@csrf<button class="text-button" type="submit">{{ __('auth.logout') }} <span aria-hidden="true">↗</span></button></form></aside>
         <div class="form-card security-card">

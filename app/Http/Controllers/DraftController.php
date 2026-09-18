@@ -9,6 +9,7 @@ use App\Services\Catalog\CategoryCatalog;
 use App\Services\Listings\DraftConflict;
 use App\Services\Listings\DraftValidator;
 use App\Services\Listings\DraftWriter;
+use App\Services\Listings\ListingLifecycle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
@@ -100,11 +101,11 @@ class DraftController extends Controller
         return redirect()->route($saved->last_step === 'preview' ? 'drafts.preview' : 'drafts.edit', $saved->last_step === 'preview' ? ['listing' => $saved] : ['listing' => $saved, 'step' => $saved->last_step]);
     }
 
-    public function preview(Listing $listing, DraftValidator $validator, CategoryCatalog $catalog)
+    public function preview(Listing $listing, DraftValidator $validator, CategoryCatalog $catalog, ListingLifecycle $lifecycle)
     {
         Gate::authorize('updateDraft', $listing);
         $listing->load('category', 'county');
 
-        return view('listings.preview', ['listing' => $listing, 'steps' => DraftValidator::STEPS, 'step' => 'preview', 'issues' => $validator->issues($listing), 'photos' => $listing->photos()->where('status', 'ready')->get(), 'definitions' => $catalog->attributes($listing->category)]);
+        return view('listings.preview', ['listing' => $listing, 'steps' => DraftValidator::STEPS, 'step' => 'preview', 'issues' => $validator->issues($listing), 'profileReady' => $lifecycle->profileReady($listing), 'photos' => $listing->photos()->where('status', 'ready')->get(), 'definitions' => $catalog->attributes($listing->category)]);
     }
 }

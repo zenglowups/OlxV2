@@ -8,5 +8,6 @@ Schedule::call(function (): void {
 })->name('infrastructure-heartbeat')->everyMinute()->withoutOverlapping();
 
 Schedule::command('media:recover-listings')->everyMinute()->withoutOverlapping();
+Schedule::command('listings:expire')->everyMinute()->withoutOverlapping();
 
 Schedule::command('media:cleanup')->everyTenMinutes()->withoutOverlapping();

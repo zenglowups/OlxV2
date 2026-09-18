@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -18,6 +19,11 @@ use Illuminate\Notifications\Notifiable;
 #[Hidden(['email', 'password', 'remember_token', 'auth_version', 'is_admin'])]
 class User extends Authenticatable implements HasLocalePreference, MustVerifyEmail
 {
+    public function profile(): HasOne
+    {
+        return $this->hasOne(SellerProfile::class);
+    }
+
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 

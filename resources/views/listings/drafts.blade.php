@@ -3,7 +3,7 @@
 @section('content')
 <section class="container drafts-page">
 <header class="account-welcome"><div><p class="eyebrow">{{ __('auth.account') }}</p><h1>{{ __('listing.drafts') }}</h1><p>{{ __('listing.drafts_intro') }}</p></div><a class="button button-primary" href="{{ route('drafts.create') }}"><span aria-hidden="true">+</span>{{ __('listing.new_draft') }}</a></header>
-<x-form-feedback />
+<p class="draft-management-link"><a class="text-link" href="{{ route('listings.manage') }}">{{ __('market.mine') }} →</a></p><x-form-feedback />
 @if($drafts->isEmpty())
 <div class="draft-empty"><span class="draft-empty-icon"><x-icon name="edit"/></span><h2>{{ __('listing.empty_title') }}</h2><p>{{ __('listing.empty_text') }}</p><a class="button button-primary" href="{{ route('drafts.create') }}">{{ __('listing.new_draft') }} <span aria-hidden="true">→</span></a></div>
 @else

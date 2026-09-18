@@ -1,8 +1,8 @@
 # OLXv2 · Aproape
 
 A Romanian classifieds marketplace, built as a portable Laravel monolith.
-**Completed: M1 foundation, M2 authentication, M3 profiles and responsive visual interface, M4 categories and administration, M5 private drafts, M6 secure listing photos. Next: M7 publication and lifecycle.**
-Registration, login, email verification, password recovery, session revocation and individual/business profiles with private S3 avatars work locally. Live category navigation, secure category/attribute administration and the resumable posting wizard work. Private drafts support autosave, up to eight processed photos, primary selection, reorder/delete and a responsive preview gallery. Publication, search and contact reveal are still pending. See docs/authentication.md and docs/listing-photos.md for setup and security decisions.
+**Completed: M1–M7: foundation, authentication, profiles, categories, private drafts, secure photos, publication and listing lifecycle. Next: M8 search and filters.**
+Registration, login, email verification, password recovery, session revocation and individual/business profiles with private S3 avatars work locally. Live category navigation, secure category/attribute administration and the resumable posting wizard work. Drafts support autosave and up to eight processed photos. Valid listings can be published, reserved, edited, sold, reposted and withdrawn; public pages, category/profile cards and a responsive owner dashboard use real records. Expiry is 30 days. Search and contact reveal remain pending. See docs/listing-lifecycle.md for state and privacy rules.
 The provisional public name **Aproape** is configured with `APP_NAME`; OLXv2 is an internal codename.
 
 ## Open the application
@@ -13,6 +13,8 @@ The provisional public name **Aproape** is configured with `APP_NAME`; OLXv2 is 
 - Sign in: **http://localhost:8088/ro/login**
 - Prepare a listing: **http://localhost:8088/ro/sell**
 - Your drafts: **http://localhost:8088/ro/account/drafts**
+- Browse listings: **http://localhost:8088/ro/listings**
+- Manage your listings: **http://localhost:8088/ro/account/listings**
 - Mailpit (local email inbox): **http://localhost:8025**
 - MinIO console: **http://localhost:9001**
 - Liveness: **http://localhost:8088/up**

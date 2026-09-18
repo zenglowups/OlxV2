@@ -1,6 +1,7 @@
 @import './marketplace.css';
 @import './listings.css';
 @import './photos.css';
+@import './market.css';
 @import './catalog.css';
 @layer base, components, responsive;
 

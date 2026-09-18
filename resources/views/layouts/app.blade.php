@@ -28,7 +28,7 @@
             <x-brand />
             <span class="brand-tagline">{{ __('ui.tagline') }}</span>
             <nav class="desktop-nav" aria-label="{{ __('ui.navigation') }}">
-                <a href="{{ route('categories.index', ['locale' => app()->getLocale()]) }}">{{ __('catalog.all') }}</a>
+                <a href="{{ route('listings.index', ['locale' => app()->getLocale()]) }}">{{ __('market.title') }}</a><a href="{{ route('categories.index', ['locale' => app()->getLocale()]) }}">{{ __('catalog.all') }}</a>
                 <a href="{{ route('home.localized', ['locale' => app()->getLocale()]) }}#principii">{{ __('ui.principles') }}</a>
                 <a href="{{ auth()->check() ? route('account', ['locale' => app()->getLocale()]) : route('login', ['locale' => app()->getLocale()]) }}">{{ auth()->check() ? __('auth.account') : __('auth.login') }}</a>
             </nav>
@@ -41,7 +41,7 @@
             <details class="mobile-menu">
                 <summary aria-label="{{ __('ui.menu') }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></summary>
                 <nav aria-label="{{ __('ui.navigation') }}">
-                    <a href="{{ route('categories.index', ['locale' => app()->getLocale()]) }}">{{ __('catalog.all') }}</a>
+                    <a href="{{ route('listings.index', ['locale' => app()->getLocale()]) }}">{{ __('market.title') }}</a><a href="{{ route('categories.index', ['locale' => app()->getLocale()]) }}">{{ __('catalog.all') }}</a>
                     <a href="{{ route('home.localized', ['locale' => app()->getLocale()]) }}#principii">{{ __('ui.principles') }}</a>
                 <a href="{{ auth()->check() ? route('account', ['locale' => app()->getLocale()]) : route('login', ['locale' => app()->getLocale()]) }}">{{ auth()->check() ? __('auth.account') : __('auth.login') }}</a>
                 </nav>
@@ -58,6 +58,7 @@
     </footer>
 <nav class="mobile-bottom" aria-label="{{ __('ui.navigation') }}">
     <a href="{{ route('home.localized', ['locale' => app()->getLocale()]) }}" @if(request()->routeIs('home', 'home.localized')) aria-current="page" @endif><x-icon name="home"/>{{ __('ui.home') }}</a>
+    <a href="{{ route('listings.index', ['locale' => app()->getLocale()]) }}" @if(request()->routeIs('listings.index', 'listings.show')) aria-current="page" @endif><x-icon name="grid"/>{{ __('market.title') }}</a>
     <a class="nav-profile" href="{{ route('drafts.create', ['locale' => app()->getLocale()]) }}" @if(request()->routeIs('drafts.*')) aria-current="page" @endif><x-icon name="edit"/>{{ __('listing.short_start') }}</a>
     <a href="{{ auth()->check() ? route('account', ['locale' => app()->getLocale()]) : route('login', ['locale' => app()->getLocale()]) }}" @if(request()->routeIs('account', 'login')) aria-current="page" @endif><x-icon name="user"/>{{ __('auth.account') }}</a>
 </nav>

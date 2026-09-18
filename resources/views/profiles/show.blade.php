@@ -30,5 +30,6 @@
             <div class="business-disclosure"><p>{{ __('profile.declared_business') }}</p><p>{{ __('profile.tax_id') }}: {{ $profile->tax_id }}</p></div>
         @endif
     </div>
+<section class="market-section"><div class="market-section-header"><h2>{{ __('market.seller_listings') }}</h2></div>@if($listings->isNotEmpty())<div class="market-grid">@foreach($listings as $listing)@include('listings.card')@endforeach</div>{{ $listings->links('components.pagination') }}@else<p class="field-hint">{{ __('market.profile_empty') }}</p>@endif</section>
 </section>
 @endsection

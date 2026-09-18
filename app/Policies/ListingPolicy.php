@@ -18,4 +18,9 @@ class ListingPolicy
         return $this->create($user) && $listing->user_id === $user->id && $listing->status === 'draft'
             ? Response::allow() : Response::denyAsNotFound();
     }
+
+    public function manage(User $user, Listing $listing): Response
+    {
+        return $this->create($user) && $listing->user_id === $user->id ? Response::allow() : Response::denyAsNotFound();
+    }
 }

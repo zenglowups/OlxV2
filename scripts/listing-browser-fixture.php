@@ -2,10 +2,11 @@
 
 use App\Models\Listing;
 use App\Models\ListingPhoto;
+use App\Models\SellerProfile;
 use App\Models\User;
+use App\Services\Media\FileCleanup;
 use App\Services\Media\ListingPhotos;
 use Illuminate\Contracts\Console\Kernel;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
@@ -24,14 +25,19 @@ if ($action === 'create') {
         echo "Existing scoped listing QA fixture retained.\n";
         exit(0);
     }
-    $records = [];
-    foreach (['desktop', 'mobile'] as $project) {
-        $uuid = (string) Str::uuid();
-        $password = Str::random(40);
-        $user = User::create(['name' => 'QALISTING '.$uuid, 'email' => 'qa-listing-'.$uuid.'@example.test', 'password' => $password, 'locale' => 'ro']);
-        $user->forceFill(['email_verified_at' => now()])->save();
-        $records[$project] = ['id' => $user->id, 'uuid' => $uuid, 'name' => $user->name, 'email' => $user->email, 'password' => $password];
-    }
+    $records = DB::transaction(function () {
+        $records = [];
+        foreach (['desktop', 'mobile'] as $project) {
+            $uuid = (string) Str::uuid();
+            $password = Str::random(40);
+            $user = User::create(['name' => 'QALISTING '.$uuid, 'email' => 'qa-listing-'.$uuid.'@example.test', 'password' => $password, 'locale' => 'ro']);
+            $user->forceFill(['email_verified_at' => now()])->save();
+            SellerProfile::create(['user_id' => $user->id, 'username' => 'qa-'.substr(str_replace('-', '', $uuid), 0, 24), 'is_public' => true, 'description' => 'Profil izolat pentru verificarea locală a anunțurilor.', 'location_label' => 'Cluj-Napoca', 'contact_method' => 'email']);
+            $records[$project] = ['id' => $user->id, 'uuid' => $uuid, 'name' => $user->name, 'email' => $user->email, 'password' => $password];
+        }
+
+        return $records;
+    });
     if (! is_dir(dirname($path))) {
         mkdir(dirname($path), 0700, true);
     }
@@ -75,24 +81,30 @@ if ($action === 'create') {
         if (! Str::isUuid($record['uuid']) || $record['name'] !== 'QALISTING '.$record['uuid'] || $record['email'] !== 'qa-listing-'.$record['uuid'].'@example.test') {
             throw new RuntimeException('Invalid QA marker.');
         }
-        DB::transaction(function () use ($record) {
+        $retired = DB::transaction(function () use ($record) {
             $user = User::whereKey($record['id'])->where('name', $record['name'])->where('email', $record['email'])->first();
             if (! $user) {
-                return;
+                return [];
             }
-            $listings = Listing::where('user_id', $user->id)->where('status', 'draft')->pluck('id');
+            $listings = Listing::where('user_id', $user->id)->pluck('id');
             $photos = ListingPhoto::whereIn('listing_id', $listings)->lockForUpdate()->get();
+            $retired = [];
             foreach ($photos as $photo) {
-                app(ListingPhotos::class)->retire($photo);
+                $retired = array_merge($retired, app(ListingPhotos::class)->retire($photo));
                 $photo->delete();
             }
+            DB::table('listing_events')->whereIn('listing_id', $listings)->delete();
             Listing::whereIn('id', $listings)->delete();
             $user->delete();
+
+            return $retired;
         });
+        foreach ($retired as $id) {
+            app(FileCleanup::class)->remove($id);
+        }
     }
-    Artisan::call('media:cleanup');
     unlink($path);
-    echo "Removed only the recorded listing QA sellers and their private drafts.\n";
+    echo "Removed only the recorded listing QA sellers, listings, events and image objects.\n";
 } else {
     throw new RuntimeException('Choose create, audit-photos or clean.');
 }

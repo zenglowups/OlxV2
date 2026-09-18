@@ -44,7 +44,7 @@
                     </select></div>
                 </fieldset>
                 <fieldset><legend>{{ __('profile.visibility') }}</legend>
-                    <label class="checkbox-field"><input type="checkbox" name="is_public" value="1" @checked(old('is_public', $profile->is_public)) aria-describedby="visibility-help">{{ __('profile.is_public') }}</label><p id="visibility-help" class="field-hint">{{ __('profile.visibility_hint') }}</p>
+                    <label class="checkbox-field"><input type="checkbox" name="is_public" value="1" @checked(old('is_public', $profile->is_public)) aria-describedby="visibility-help">{{ __('profile.is_public') }}</label><p id="visibility-help" class="field-hint">{{ __('profile.visibility_hint') }} {{ __('market.profile_private_note') }}</p>
                 </fieldset>
                 <button class="button" type="submit">{{ __('profile.save') }}</button>
             </form>

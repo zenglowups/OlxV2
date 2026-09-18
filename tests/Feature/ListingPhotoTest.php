@@ -268,7 +268,7 @@ class ListingPhotoTest extends TestCase
         $photo = ListingPhoto::sole();
         $this->process($photo);
         $listing->forceFill(['status' => 'active'])->save();
-        $this->get('/media/listings/'.$photo->public_id.'/card')->assertNotFound();
+        $this->get('/media/listings/'.$photo->public_id.'/card')->assertOk();
         $this->delete($this->url($listing, $photo), ['version' => 2])->assertNotFound();
         $listing->forceFill(['status' => 'draft'])->save();
         DB::table('users')->where('id', $listing->user_id)->update(['status' => 'banned']);
@@ -307,11 +307,11 @@ class ListingPhotoTest extends TestCase
         $disk = \Mockery::mock(FilesystemAdapter::class);
         $disk->shouldReceive('delete')->times(4)->andThrow(new \RuntimeException('Offline storage'));
         Storage::shouldReceive('disk')->with('s3')->andReturn($disk);
-        $this->delete($this->url($listing,$photo),['version' => 2])->assertRedirect();
-        $this->assertDatabaseCount('listing_photos',0);
-        $this->assertDatabaseCount('pending_file_deletions',4);
+        $this->delete($this->url($listing, $photo), ['version' => 2])->assertRedirect();
+        $this->assertDatabaseCount('listing_photos', 0);
+        $this->assertDatabaseCount('pending_file_deletions', 4);
         foreach ($photo->paths() as $path) {
-            $this->assertDatabaseHas('pending_file_deletions',['path' => $path, 'attempts' => 1]);
+            $this->assertDatabaseHas('pending_file_deletions', ['path' => $path, 'attempts' => 1]);
         }
     }
 }

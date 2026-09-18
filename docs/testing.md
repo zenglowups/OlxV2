@@ -107,3 +107,11 @@ version conflicts, processing failures, retries and durable cleanup. The browser
 MinIO/Redis uploads, primary/reorder/delete, responsive gallery and draft cards. Run the fixture
 audit-photos action after browser checks to verify private S3 ACLs, anonymous 403 and source removal.
 See docs/listing-photos.md for the full flow and scoped cleanup commands.
+
+## M7 publication and lifecycle
+ListingLifecycleTest covers real publication validation, all owner transitions, expiry without
+depending on scheduler timing, audit records, privacy revocation and paginated management.
+The desktop/mobile lifecycle browser test publishes only isolated QA listings, checks public
+gallery/category/profile views, then reserves, edits, sells, reposts and withdraws them.
+The listing fixture now creates a public QA profile and cleans only its recorded listings/events.
+See docs/listing-lifecycle.md for state rules and retained private records.

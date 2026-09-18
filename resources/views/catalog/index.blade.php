@@ -8,10 +8,11 @@
 <h2 class="catalog-subtitle">{{ $category ? __('catalog.children') : __('catalog.all') }}</h2>
 <div class="category-grid">@foreach($categories as $item)<x-category-card :category="$item"/>@endforeach</div>
 {{ $categories->links('components.pagination') }}
-@elseif($category)
+@elseif($category && ($listings ?? collect())->isEmpty())
 <div class="catalog-empty"><x-icon name="heart"/><h2>{{ __('catalog.leaf_title') }}</h2><p>{{ __('catalog.leaf_text') }}</p><a class="button button-primary" href="{{ route('drafts.create', ['category' => $category->slug]) }}">{{ __('listing.start') }}</a></div>
-@else
+@elseif(!$category)
 <p class="catalog-empty">{{ __('listing.no_categories') }}</p>
 @endif
+@if(isset($listings) && $listings->isNotEmpty())<section class="market-section"><div class="market-section-header"><h2>{{ __('market.category_listings') }}</h2></div><div class="market-grid">@foreach($listings as $listing)@include('listings.card')@endforeach</div>{{ $listings->links('components.pagination') }}</section>@endif
 </section>
 @endsection

@@ -6,7 +6,7 @@ Complete and validate one milestone before starting the next; do not rebuild fin
 
 ## Execution state
 
-**M1 complete in commit 03eb66b. M2 complete in commit 89e0e2c. M3 complete in commit 327bcbb. M4 complete in commit c068fc4. M5 complete in commit 20bb3f9. M6 photos complete at this checkpoint. Next: M7.**
+**M1 complete in commit 03eb66b. M2 complete in commit 89e0e2c. M3 complete in commit 327bcbb. M4 complete in commit c068fc4. M5 complete in commit 20bb3f9. M6 complete in commit 1754064. M7 complete at this checkpoint. Next: M8.**
 
 ### M1 completed
 - Laravel 13 / PHP 8.4 modular monolith; official scaffold and locked dependencies.
@@ -41,11 +41,11 @@ Complete and validate one milestone before starting the next; do not rebuild fin
 - Startup clears compiled code only; it does not flush Redis data, sessions or rate limits.
 
 ### Exact next task
-Implement M7: validated publication, real public listing pages, owner management/editing,
-active/reserved/sold/expired/suspended/removed states, 30-day expiry and renewal.
-Integrate eligible public images, category/profile listing cards and real paginated owner views.
-Keep drafts private, contact values protected until M9, and moderation state unreviewed on publication.
-Validate and commit M7 before M8 search. No synthetic inventory or fabricated statistics.
+Implement M8: search service abstraction, indexed PostgreSQL text search, category/attribute/price/
+location filters, validated sorting and bounded pagination with a responsive filter interface.
+Reuse centralized public eligibility and preserve all privacy/lifecycle restrictions.
+Validate query plans and browser workflows, then commit before M9 protected contact reveal.
+No synthetic inventory or fabricated statistics. External preview has only been explained, not enabled.
 Continue the navy/teal responsive interface and integrate profile listings/reviews in M7/M11.
 Owner requested faster visible progress and continued again on 2026-09-18.
 
@@ -144,6 +144,27 @@ Owner requested faster visible progress and continued again on 2026-09-18.
 - Windows app browser confirmed Aproape at localhost:8088; only scoped QA accounts/images cleaned.
 - See docs/listing-photos.md. Public image eligibility remains M7; production storage remains external.
 
+### M7 completed and validated — 2026-09-18
+- Validated immediate publication, stable public pages/gallery, category/profile/home cards from real data.
+- Responsive My listings dashboard with actual counts, state tabs, twelve-row pages and owner actions.
+- Explicit edit-to-private-draft flow, reservation, sale, repost, withdrawal, 30-day expiry and audit journal.
+- Shared public eligibility revokes listings/images for expiry, privacy, moderation and account restrictions.
+- Source S3 stays private; contact values stay protected. Public profile visibility is explicit before publishing.
+- Additive lifecycle migration and complete Windows START passed; scheduled expiry is registered every minute.
+- PHPUnit: **94 passed, 2,687 assertions**, 64.57 seconds alongside browser tests. Dedicated lifecycle: 12 / 190.
+- Playwright: **26 passed**, 1.4 minutes. Final post-start lifecycle/gallery run: 2 passed, 35.1 seconds.
+- Desktop/mobile screenshots, actual loaded thumbnails, axe and 320–1440px overflow verified.
+- Actual MinIO audit: 30 private variants, denied anonymous access, retired sources.
+- Pint: 122 files; Composer strict validation and frontend lint/build passed.
+- CSS 57.37 kB / 11.93 kB gzip; JS 4.21 kB / 1.74 kB gzip.
+- Infrastructure smoke passed (probe 4b1ea336-b6e5-46d3-aad2-bc793120ee4c); Windows browser refreshed.
+- EXPLAIN ANALYZE inspected on the small local QA dataset: public feed 0.158 ms (one row), expiry 0.021 ms
+  (zero due rows), bounded Limit nodes and sequential scans chosen for tiny tables. Not load-test evidence.
+- Scoped QA cleanup includes own lifecycle records and every journaled image path; user data preserved.
+- See docs/listing-lifecycle.md. Contact remains M9, moderation tools M13/M14, reminder mail M15.
+- Owner asked about GitHub/Cloudflare Tunnel. Explained code vs running Docker service, private Access preview,
+  always-on host requirement and exclusion of .env/secrets. No push, tunnel or public exposure performed.
+
 ## Milestones
 
 | # | Milestone | State |
@@ -154,7 +175,7 @@ Owner requested faster visible progress and continued again on 2026-09-18.
 | 4 | Hierarchical categories and dynamic attributes/admin | Complete |
 | 5 | Posting wizard, private drafts, preview | Complete |
 | 6 | Secure image pipeline and S3 variants | Complete |
-| 7 | Publishing, lifecycle, editing, expiration, renewals | Pending |
+| 7 | Publishing, lifecycle, editing, expiration, renewals | Complete |
 | 8 | Search abstraction, filters, indexes, pagination | Pending |
 | 9 | Protected contact reveal and anti-abuse | Pending |
 | 10 | Favorites, recent searches, saved searches | Pending |

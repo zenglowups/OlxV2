@@ -64,8 +64,9 @@ class ListingPhotoController extends Controller
 
     public function image(Request $request, ListingPhoto $photo, string $variant)
     {
-        abort_unless($request->user(), 404);
-        Gate::authorize('updateDraft', $photo->listing);
+        if (! ($request->user() && Gate::allows('manage', $photo->listing))) {
+            abort_unless(Listing::publiclyVisible()->whereKey($photo->listing_id)->exists(), 404);
+        }
         abort_unless($photo->status === 'ready' && isset($photo->variants[$variant]), 404);
 
         return Storage::disk('s3')->response($photo->variantPath($variant), 'listing.webp', [

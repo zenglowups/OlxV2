@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProfileRequest;
 use App\Models\SellerProfile;
 use App\Models\User;
+use App\Services\Listings\ListingFeed;
 use App\Services\Media\AvatarProcessor;
 use App\Services\Media\FileCleanup;
 use Illuminate\Database\UniqueConstraintViolationException;
@@ -70,15 +71,15 @@ class ProfileController extends Controller
         return redirect()->route('profile.edit')->with('status', __('profile.saved'));
     }
 
-    public function show(SellerProfile $profile)
+    public function show(SellerProfile $profile, ListingFeed $feed)
     {
         $profile->load('user:id,name,account_type,email_verified_at,created_at,status,suspended_until');
         abort_unless($profile->publiclyVisible(), 404);
 
-        return view('profiles.show', ['profile' => $profile, 'preview' => false]);
+        return view('profiles.show', ['profile' => $profile, 'preview' => false, 'listings' => $feed->query()->where('user_id', $profile->user_id)->simplePaginate(8)]);
     }
 
-    public function preview(Request $request)
+    public function preview(Request $request, ListingFeed $feed)
     {
         $profile = SellerProfile::with('user')->where('user_id', $request->user()->id)->first();
         if (! $profile) {
@@ -86,6 +87,6 @@ class ProfileController extends Controller
         }
         Gate::authorize('update', $profile);
 
-        return view('profiles.show', ['profile' => $profile, 'preview' => true]);
+        return view('profiles.show', ['profile' => $profile, 'preview' => true, 'listings' => $feed->query()->where('user_id', $profile->user_id)->simplePaginate(8)]);
     }
 }

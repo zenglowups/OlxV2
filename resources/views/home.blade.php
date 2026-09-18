@@ -25,6 +25,7 @@
 </section>
 
 @include('catalog.home-section')
+@if($latestListings->isNotEmpty())<section class="market-section container"><div class="market-section-header"><h2>{{ __('market.latest') }}</h2><a href="{{ route('listings.index') }}">{{ __('market.all') }} →</a></div><div class="market-grid">@foreach($latestListings as $listing)@include('listings.card')@endforeach</div></section>@endif
 <section class="home-section container" id="principii" aria-labelledby="principles-title">
     <div class="section-heading"><div><p class="eyebrow">{{ __('ui.section_eyebrow') }}</p><h2 id="principles-title">{{ __('ui.section_title') }}</h2></div><p>{{ __('ui.section_intro') }}</p></div>
     <div class="principles-grid">
@@ -39,6 +40,6 @@
 </section>
 <section class="join-section container">
     <div class="join-card"><div><p class="eyebrow">{{ __('ui.join_eyebrow') }}</p><h2>{{ __('ui.join_title') }}</h2><p>{{ __('ui.join_text') }}</p></div><a class="button button-primary" href="{{ auth()->check() ? route('account') : route('register') }}">{{ auth()->check() ? __('auth.account') : __('ui.start') }} <span aria-hidden="true">→</span></a></div>
-    <p class="availability-note">{{ __('ui.notice_text') }}</p>
+    <p class="availability-note">{{ __('market.early_access') }}</p>
 </section>
 @endsection
